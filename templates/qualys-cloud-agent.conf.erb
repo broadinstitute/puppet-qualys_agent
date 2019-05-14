@@ -1,0 +1,23 @@
+# THIS FILE IS AUTOMATICALLY DISTRIBUTED BY PUPPET.
+# ANY CHANGES WILL BE OVERWRITTEN.
+
+#Config File
+#LogLevel: Higher value means more verbose. 0=fatal, 1=error, 2=warning, 3=info, 4=debug, 5=tracing
+#CmdMaxTimeOut: TimeOut in seconds. Any command execution that exceeds this time will be killed.
+#ProcessPriority: To set process priority(nice value).
+#RequestTimeOut: Http request timeout in seconds.
+#CmdStdOutSize: Command std output size in KB. Any command output size exceeds this time will be truncated.
+
+ActivationId=<%= @activation_id %>
+CustomerId=<%= @customer_id %>
+UseSudo=<%= @use_sudo %>
+SudoUser=<%= @sudo_user %>
+UserGroup=<%= @user_group %>
+SudoCommand=<%= @sudo_command %>
+LogLevel=<%= @log_level %>
+LogFileDir=<%= @log_file_dir %>/
+CmdMaxTimeOut=<%= @cmd_max_timeout %>
+ProcessPriority=<%= @process_priority %>
+RequestTimeOut=<%= @request_timeout %>
+UseAuditDispatcher=<%= @use_audit_dispatcher %>
+CmdStdOutSize=<%= @cmd_stdout_side %>
