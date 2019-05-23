@@ -1,9 +1,7 @@
-# @summary A short summary of the purpose of this class
+# @summary Configure the Qualys agent
 #
-# A description of what this class does
-#
-# @example
-#   include qualys_agent::config
+# Manage the main qualys-cloud-agent.conf configuration file.  This class also includes the `qagent_log` and
+# `qagent_udc_log` subclasses to configure both log configuration files.
 #
 class qualys_agent::config {
 

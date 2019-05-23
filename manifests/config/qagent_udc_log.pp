@@ -1,9 +1,6 @@
-# @summary A short summary of the purpose of this class
+# @summary Configure the Qualys agent
 #
-# A description of what this class does
-#
-# @example
-#   include qualys_agent::config::qagent_udc_log
+# Manage the main qagent-udc-log.conf configuration file
 class qualys_agent::config::qagent_udc_log {
 
   $channel_name = $::qualys_agent::config::channel_name
