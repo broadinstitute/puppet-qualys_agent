@@ -125,6 +125,11 @@ class qualys_agent (
   Optional[String] $version,
 ) {
 
+  # Protect against an bad setting for log_file_dir
+  if $::qualys_agent::log_file_dir == '/' {
+    fail('The log file directory is set to /.  Installation cannot continue.')
+  }
+
   contain 'qualys_agent::user'
   contain 'qualys_agent::package'
   contain 'qualys_agent::config'
