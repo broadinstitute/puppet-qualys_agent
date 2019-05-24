@@ -1,3 +1,6 @@
+<%- | String $channel_name,
+      Stdlib::Absolutepath $log_path,
+| -%>
 # THIS FILE IS AUTOMATICALLY DISTRIBUTED BY PUPPET.
 # ANY CHANGES WILL BE OVERWRITTEN.
 
@@ -11,7 +14,7 @@ logging.channels.c2.facility=24
 logging.channels.c2.options= 1
 
 logging.channels.c3.class = FileChannel
-logging.channels.c3.path = <%= @log_path %>
+logging.channels.c3.path = <%= $log_path %>
 logging.channels.c3.rotation = 10M
 logging.channels.c3.purgeCount = 5
 logging.channels.c3.archive = number
@@ -21,7 +24,7 @@ logging.loggers.root.channel = c3
 logging.loggers.root.level = information
 
 logging.loggers.l1.name = qualys-cloud-agent
-logging.loggers.l1.channel = <%= @channel_name %>
+logging.loggers.l1.channel = <%= $channel_name %>
 logging.loggers.l1.level = information
 
 logging.loggers.l2.name = qualys-cloud-agent.provision

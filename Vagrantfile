@@ -24,6 +24,7 @@ Vagrant.configure(2) do |config|
   config.vm.provision "file", source: "Gemfile", destination: "/tmp/Gemfile"
   config.vm.provision "file", source: "vagrant_files/hiera.yaml", destination: "/tmp/hiera.yaml"
   config.vm.provision "file", source: "vagrant_files/global.yaml", destination: "/tmp/global.yaml"
+  config.vm.provision "file", source: "vagrant_files/pdk.sh", destination: "/tmp/pdk.sh"
   config.vm.provision "shell", path: "vagrant_files/centos7-p5.sh"
 
   config.vm.synced_folder ".", "/etc/puppetlabs/code/modules/qualys_agent"

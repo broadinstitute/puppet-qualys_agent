@@ -3,6 +3,7 @@ qualys_agent::ensure: present
 qualys_agent::activation_id: ~
 qualys_agent::agent_group: ~
 qualys_agent::agent_user: qualys_auth
+qualys_agent::agent_user_homedir: /usr/local/qualys
 qualys_agent::cmd_max_timeout: 1800
 qualys_agent::cmd_stdout_size: 1024
 qualys_agent::conf_dir: /etc/qualys/cloud-agent
@@ -10,12 +11,15 @@ qualys_agent::customer_id: ~
 qualys_agent::log_dest_type: file
 qualys_agent::log_file_dir: /var/log/qualys
 qualys_agent::log_level: 3
-qualys_agent::package_name: 'qualys-cloud-agent'
+qualys_agent::manage_group: true
+qualys_agent::manage_service: true
+qualys_agent::manage_user: true
+qualys_agent::package_name: qualys-cloud-agent
 qualys_agent::process_priority: 0
 qualys_agent::request_timeout: 600
 qualys_agent::service_enable: true
-qualys_agent::service_ensure: 'running'
-qualys_agent::service_name: 'qualys-cloud-agent'
+qualys_agent::service_ensure: running
+qualys_agent::service_name: qualys-cloud-agent
 qualys_agent::sudo_command: sudo
 qualys_agent::sudo_user: root
 qualys_agent::use_audit_dispatcher: 1

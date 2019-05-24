@@ -100,6 +100,7 @@ class qualys_agent (
   String $activation_id,
   Optional[String] $agent_group,
   String $agent_user,
+  Stdlib::Absolutepath $agent_user_homedir,
   Integer $cmd_max_timeout,
   Integer $cmd_stdout_size,
   Stdlib::Absolutepath $conf_dir,
@@ -107,6 +108,9 @@ class qualys_agent (
   Enum['file', 'syslog'] $log_dest_type,
   Stdlib::Absolutepath $log_file_dir,
   Integer $log_level,
+  Boolean $manage_group,
+  Boolean $manage_service,
+  Boolean $manage_user,
   String $package_name,
   Integer $process_priority,
   Integer $request_timeout,
@@ -120,11 +124,14 @@ class qualys_agent (
   Optional[String] $user_group,
   Optional[String] $version,
 ) {
-  if $ensure != 'absent' {
-    contain 'qualys_agent::config'
-    contain 'qualys_agent::package'
-    contain 'qualys_agent::service'
 
-    Class['qualys_agent::package'] -> Class['qualys_agent::config'] -> Class['qualys_agent::service']
-  }
+  contain 'qualys_agent::user'
+  contain 'qualys_agent::package'
+  contain 'qualys_agent::config'
+  contain 'qualys_agent::service'
+
+  Class['qualys_agent::user']
+  -> Class['qualys_agent::package']
+  -> Class['qualys_agent::config']
+  -> Class['qualys_agent::service']
 }
