@@ -112,7 +112,7 @@ class qualys_agent (
   Integer $request_timeout,
   Boolean $service_enable,
   Enum['running', 'stopped'] $service_ensure,
-  Sring $service_name,
+  String $service_name,
   String $sudo_command,
   String $sudo_user,
   Integer $use_audit_dispatcher,
