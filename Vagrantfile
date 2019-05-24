@@ -18,6 +18,7 @@ Vagrant.configure(2) do |config|
    vb.gui = false
    vb.memory = "1024"
    vb.name = "puppet-qualys-agent"
+   automount = true
   end
 
   config.vm.provision "file", source: "Gemfile", destination: "/tmp/Gemfile"
