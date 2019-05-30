@@ -61,9 +61,6 @@
 # * `sudo_command`
 # The SudoCommand value in qualys-cloud-agent.conf (Default: sudo)
 #
-# * `sudo_user`
-# The SudoUser value in qualys-cloud-agent.conf (Default: root)
-#
 # * `use_audit_dispatcher`
 # The UseAuditDispatcher value in qualys-cloud-agent.conf (Default: 1)
 #
@@ -71,7 +68,7 @@
 # The UseSudo value in qualys-cloud-agent.conf (Default: 0)
 #
 # * `user_group`
-# The UserGroup value in qualys-cloud-agent.conf (Default: undef)
+# The UserGroup value in qualys-cloud-agent.conf (Default: root)
 #
 # * `version`
 # The version of the Qualys agent package to install (Default: undef)
@@ -118,7 +115,6 @@ class qualys_agent (
   Enum['running', 'stopped'] $service_ensure,
   String $service_name,
   String $sudo_command,
-  String $sudo_user,
   Integer $use_audit_dispatcher,
   Integer $use_sudo,
   Optional[String] $user_group,
