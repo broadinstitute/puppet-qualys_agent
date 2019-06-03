@@ -4,18 +4,25 @@
 #
 class qualys_agent::package {
 
-  if $::qualys_agent::ensure == 'present' {
-    if $::qualys_agent::version {
-      $ensure = $::qualys_agent::version
-    } else {
-      $ensure = $::qualys_agent::ensure
+  if $::qualys_agent::manage_package {
+    # Force package remove if agent ensure is "absent"
+    $ensure = $::qualys_agent::ensure ? {
+      present => $::qualys_agent::package_ensure,
+      absent  => 'absent',
+    }
+
+    package { 'qualys_agent':
+      ensure => $ensure,
+      name   => $::qualys_agent::package_name,
+      notify => $::qualys_agent::service::service_dep,
+    }
+    # Do not create an ordering dependency if we are removing the agent
+    $package_dep = $::qualys_agent::ensure ? {
+      present => Package['qualys_agent'],
+      absent  => undef,
     }
   } else {
-    $ensure = $::qualys_agent::ensure
-  }
-  package { 'qualys_agent':
-    ensure => $ensure,
-    name   => $::qualys_agent::package_name,
+    $package_dep = undef
   }
 
   # Fix permissions on all paths used by the agent as the package does not do this on install
@@ -26,11 +33,13 @@ class qualys_agent::package {
     $::qualys_agent::log_file_dir,
   ]
 
-  file { $agent_paths :
-    ensure  => 'directory',
-    group   => $::qualys_agent::agent_group,
-    owner   => $::qualys_agent::owner,
-    require => User[$::qualys_agent::agent_user],
-    recurse => true,
+  if $::qualys_agent::ensure != 'absent' {
+    file { $agent_paths :
+      ensure  => 'directory',
+      group   => $::qualys_agent::agent_group,
+      owner   => $::qualys_agent::owner,
+      require => $::qualys_agent::user::user_dep,
+      recurse => true,
+    }
   }
 }

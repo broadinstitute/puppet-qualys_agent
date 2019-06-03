@@ -7,4 +7,6 @@ cd /etc/puppetlabs/code/modules/qualys_agent || exit
 rm -f Gemfile.lock
 rm -f Puppetfile.lock
 bundle install
-librarian-puppet install --verbose --path=/etc/puppetlabs/code/modules
+# librarian-puppet is busted in some way...
+# librarian-puppet install --verbose --path=/etc/puppetlabs/code/modules
+puppet module install puppetlabs-stdlib

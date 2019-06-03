@@ -1,83 +1,225 @@
 # qualys_agent
 
+[![Puppet Forge](https://img.shields.io/puppetforge/dt/broadinstitute/certs.svg)](https://forge.puppetlabs.com/broadinstitute/certs)
+[![Puppet Forge](https://img.shields.io/puppetforge/v/broadinstitute/certs.svg)](https://forge.puppetlabs.com/broadinstitute/certs)
+[![Puppet Forge](https://img.shields.io/puppetforge/f/broadinstitute/certs.svg)](https://forge.puppetlabs.com/broadinstitute/certs)
+[![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
+
 ## Table of Contents
 
-1. [Description](#description)
-1. [Setup - The basics of getting started with qualys_agent](#setup)
-    * [What qualys_agent affects](#what-qualys_agent-affects)
+1. [Overview](#overview)
+2. [Module Description](#module-description)
+3. [Setup](#setup)
     * [Setup requirements](#setup-requirements)
-    * [Beginning with qualys_agent](#beginning-with-qualys_agent)
-1. [Usage - Configuration options and additional functionality](#usage)
-1. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
-1. [Limitations - OS compatibility, etc.](#limitations)
-1. [Development - Guide for contributing to the module](#development)
+    * [Installation](#installation)
+4. [Usage](#usage)
+    * [Puppet Manifest](#puppet-manifest)
+    * [With Hiera](#with-hiera)
+    * [Running as a user other than root](#running-as-a-user-other-than-root)
+5. [Reference](#reference)
+6. [Limitations - OS compatibility, etc.](#limitations)
+7. [Release Notes](#release-notes)
+8. [Contributors](#contributors)
 
-## Description
+## Overview
 
-Start with a one- or two-sentence summary of what the module does and/or what
-problem it solves. This is your 30-second elevator pitch for your module.
-Consider including OS/Puppet version it works with.
+Install and configure the Qualys Cloud Agent on a system.
 
-You can give more descriptive information in a second paragraph. This paragraph
-should answer the questions: "What does this module *do*?" and "Why would I use
-it?" If your module has a range of functionality (installation, configuration,
-management, etc.), this is the time to mention it.
+## Module Description
+
+This module will install the Qualys Cloud Agent from a repository and keep the required configuration files updated.
 
 ## Setup
 
-### What qualys_agent affects **OPTIONAL**
+### Setup Requirements
 
-If it's obvious what your module touches, you can skip this section. For
-example, folks can probably figure out that your mysql_instance module affects
-their MySQL instances.
+Due to the nature of Qualys' distribution methods, making the actual package available in a repository is outside the scope of this module.  In most cases, you can create your own custom Yum, Apt, etc. repository and serve out the `qualys-cloud-agent` package you can download from the Qualys interface.
 
-If there's more that they should know about, though, this is the place to mention:
+### Installation
 
-* A list of files, packages, services, or operations that the module will alter,
-  impact, or execute.
-* Dependencies that your module automatically installs.
-* Warnings or other important notices.
+No trailing slashes should be provided for any paths.
 
-### Setup Requirements **OPTIONAL**
+#### Puppet Forge
 
-If your module requires anything extra before setting up (pluginsync enabled,
-etc.), mention it here.
+``` sh
+puppet module install broadinstitute-qualys_agent
+```
 
-If your most recent release breaks compatibility or requires particular steps
-for upgrading, you might want to include an additional "Upgrading" section
-here.
+#### Puppetfile
 
-### Beginning with qualys_agent
-
-The very basic steps needed for a user to get the module up and running. This
-can include setup steps, if necessary, or it can be an example of the most
-basic use of the module.
+``` sh
+mod 'broadinstitute/qualys_agent'
+```
 
 ## Usage
 
-This section is where you describe how to customize, configure, and do the
-fancy stuff with your module here. It's especially helpful if you include usage
-examples and code samples for doing things with your module.
+### Puppet Manifest
+
+```puppet
+  include certs
+  $domain = 'www.example.com'
+  certs::site { $domain:
+    source_path    => 'puppet:///site_certificates',
+    ca_cert        => true,
+    ca_name        => 'caname',
+    ca_source_path => 'puppet:///ca_certs',
+  }
+```
+
+### With Hiera
+
+```yaml
+  classes:
+    - certs
+  certs::sites:
+    'www.example.com':
+      source_path: 'puppet:///site_certificates'
+      ca_cert: true
+      ca_name: 'caname'
+      ca_source_path: 'puppet:///ca_certs'
+```
+
+### Running as a user other than root
+
+The configuration is a little tricky if you want to run as a non-root user.  To do so, you need to set several options in the configuration together.  An example is configured below:
+
+```yaml
+qualys_agent::activation_id: 00000000-0000-0000-0000-000000000000
+qualys_agent::agent_user: 'qualys_auth'
+qualys_agent::customer_id: 00000000-0000-0000-0000-000000000000
+qualys_agent::sudo_user: 'qualys_auth'
+qualys_agent::use_sudo: 1
+```
+
+This turns on the use of sudo, but it also sets the `User` and `SudoUser` variables in the configuration file, which are both necessary to make the service run as a non-root user.
 
 ## Reference
 
-Here, include a complete list of your module's classes, types, providers,
-facts, along with the parameters for each. Users refer to this section (thus
-the name "Reference") to find specific details; most users don't read it per
-se.
+### Class: `qualys_agent`
+
+#### `ensure`
+
+Ensure that the Qualys agent is present on the system, or absent. **Default: true**
+
+#### `activation_id`
+
+The Activation ID you receive from Qualys for reporting back to their API **(required)** **Default: undef**
+
+#### `agent_group`
+
+The group that should run the agent. **Default: undef**
+
+#### `agent_user`
+
+The user that should run the agent. **Default: undef**
+
+#### `cmd_max_timeout`
+
+The CmdMaxTimeOut value in `qualys-cloud-agent.conf`. **Default: 1800**
+
+#### `cmd_stdout_size`
+
+The CmdStdOutSize value in `qualys-cloud-agent.conf`. **Default: 1024**
+
+#### `conf_dir`
+
+The directory where the `qualys-cloud-agent.conf` file will exist. **Default: /etc/qualys/cloud-agent**
+
+#### `customer_id`
+
+The Customer ID you receive from Qualys for reporting back to their API. **(required)** **Default: undef**
+
+#### `hostid_path`
+
+The full filesystem path to the hostid file. **Default: /etc/qualys/hostid**
+
+#### `hostid_search_dir`
+
+The HostIdSearchDir value in `qualys-cloud-agent.conf`. **Default: undef**
+
+#### `log_dest_type`
+
+The log type (file or syslog). **Default: file**
+
+#### `log_file_dir`
+
+The LogFileDir value in `qualys-cloud-agent.conf`.
+The directory in which the log files should be written. **Default: /var/log/qualys**
+
+#### `log_level`
+
+The LogLevel value in `qualys-cloud-agent.conf`. **Default: 3**
+
+#### `manage_group`
+
+Boolean to determine whether the group is managed by Puppet or not. **Default: true**
+
+#### `manage_package`
+
+Boolean to determine whether the package is managed by Puppet or not. **Default: true**
+
+#### `manage_service`
+
+Boolean to determine whether the service is managed by Puppet or not. **Default: true**
+
+#### `manage_user`
+
+Boolean to determine whether the user is managed by Puppet or not. **Default: true**
+
+#### `package_ensure`
+
+The "ensure" value for the Qualys agent package. This value can be "installed", "absent", or a version number if you want to specify a specific package version numer. **Default: installed**
+
+#### `package_name`
+
+The name of the package to install. **Default: qualys-cloud-agent**
+
+#### `process_priority`
+
+The ProcessPriority value in `qualys-cloud-agent.conf`. **Default: 0**
+
+#### `request_timeout`
+
+The RequestTimeOut value in `qualys-cloud-agent.conf`. **Default: 600**
+
+#### `service_enable`
+
+Boolean to determine whether the service is enabled or not. **Default: true**
+
+#### `service_ensure`
+
+Ensure that the Qualys agent is running on the system, or stopped. **Default: running**
+
+#### `service_name`
+
+The name of the Qualys agent service. **Default: qualys-cloud-agent**
+
+#### `sudo_command`
+
+The SudoCommand value in `qualys-cloud-agent.conf`. **Default: sudo**
+
+#### `sudo_user`
+
+The SudoUser value in `qualys-cloud-agent.conf`. **Default: undef**
+
+#### `use_audit_dispatcher`
+
+The UseAuditDispatcher value in `qualys-cloud-agent.conf`. **Default: 1**
+
+#### `use_sudo`
+
+The UseSudo value in `qualys-cloud-agent.conf`. **Default: 0**
+
+#### `user_group`
+
+The UserGroup value in `qualys-cloud-agent.conf`. **Default: undef**
 
 ## Limitations
 
-This is where you list OS compatibility, version compatibility, etc. If there
-are Known Issues, you might want to include them under their own heading here.
+This has currently only been tested extensively on RedHat-based systems.
 
-## Development
+## Release Notes
 
-Since your module is awesome, other users will want to play with it. Let them
-know what the ground rules for contributing are.
+* 1.0.0
 
-## Release Notes/Contributors/Etc. **Optional**
-
-If you aren't using changelog, put your release notes here (though you should
-consider using changelog). You can also add any additional sections you feel
-are necessary or important to include here. Please use the `##` header.
+## Contributors
