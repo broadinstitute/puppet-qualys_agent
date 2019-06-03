@@ -7,9 +7,9 @@
       Integer $process_priority,
       Integer $request_timeout,
       String $sudo_command,
-      String $sudo_user,
       Integer $use_audit_dispatcher,
       Integer $use_sudo,
+      String $user,
       Optional[String] $user_group,
 | -%>
 # THIS FILE IS AUTOMATICALLY DISTRIBUTED BY PUPPET.
@@ -23,15 +23,16 @@
 #CmdStdOutSize: Command std output size in KB. Any command output size exceeds this time will be truncated.
 
 ActivationId=<%= $activation_id %>
-CustomerId=<%= $customer_id %>
-UseSudo=<%= $use_sudo %>
-SudoUser=<%= $sudo_user %>
-UserGroup=<%= $user_group %>
-SudoCommand=<%= $sudo_command %>
-LogLevel=<%= $log_level %>
-LogFileDir=<%= $log_file_dir %>/
 CmdMaxTimeOut=<%= $cmd_max_timeout %>
+CmdStdOutSize=<%= $cmd_stdout_size %>
+CustomerId=<%= $customer_id %>
+LogFileDir=<%= $log_file_dir %>
+LogLevel=<%= $log_level %>
 ProcessPriority=<%= $process_priority %>
 RequestTimeOut=<%= $request_timeout %>
+SudoCommand=<%= $sudo_command %>
+SudoUser=<%= $user %>
 UseAuditDispatcher=<%= $use_audit_dispatcher %>
-CmdStdOutSize=<%= $cmd_stdout_size %>
+User=<%= $user %>
+UserGroup=<%= $user_group %>
+UseSudo=<%= $use_sudo %>

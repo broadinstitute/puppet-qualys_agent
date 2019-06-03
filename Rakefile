@@ -1,3 +1,4 @@
+require 'puppet-lint/tasks/puppet-lint'
 require 'puppetlabs_spec_helper/rake_tasks'
 require 'puppet-syntax/tasks/puppet-syntax'
 require 'puppet_blacksmith/rake_tasks' if Bundler.rubygems.find_name('puppet-blacksmith').any?
@@ -29,10 +30,10 @@ def changelog_future_release
 end
 
 PuppetLint.configuration.send('disable_relative')
-PuppetLint.configuration.send('ignore-paths=./spec/*')
-PuppetLint.configuration.send('no-80chars-check')
-PuppetLint.configuration.send('no-autoloader_layout-check')
-PuppetLint.configuration.send('no-puppet_url_without_modules-check')
+PuppetLint.configuration.ignore_paths = ['./spec/*']
+PuppetLint.configuration.send('disable_80chars_check')
+PuppetLint.configuration.send('disable_autoloader_layout_check')
+PuppetLint.configuration.send('disable_puppet_url_without_modules_check')
 
 if Bundler.rubygems.find_name('github_changelog_generator').any?
   GitHubChangelogGenerator::RakeTask.new :changelog do |config|
