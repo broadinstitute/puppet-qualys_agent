@@ -26,16 +26,18 @@ class qualys_agent::user {
   }
 
   if $::qualys_agent::manage_user {
-    user { 'qualys_user':
-      ensure   => $::qualys_agent::ensure,
-      comment  => 'Qualys Cloud Agent User',
-      gid      => $qualys_group,
-      home     => $::qualys_agent::agent_user_homedir,
-      name     => $::qualys_agent::agent_user,
-      password => '*',
-      system   => true,
-      before   => Package['qualys_agent'],
-      require  => $group_req,
+    if $::qualys_agent::agent_user && ($::qualys_agent::agent_user != 'root') {
+      user { 'qualys_user':
+        ensure   => $::qualys_agent::ensure,
+        comment  => 'Qualys Cloud Agent User',
+        gid      => $qualys_group,
+        home     => $::qualys_agent::agent_user_homedir,
+        name     => $::qualys_agent::agent_user,
+        password => '*',
+        system   => true,
+        before   => Package['qualys_agent'],
+        require  => $group_req,
+      }
     }
   }
 

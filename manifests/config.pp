@@ -37,7 +37,7 @@ class qualys_agent::config {
     group     => $::qualys_agent::agent_group,
     mode      => '0600',
     name      => "${qualys_agent::conf_dir}/qualys-cloud-agent.conf",
-    owner     => $::qualys_agent::agent_user,
+    owner     => $::qualys_agent::owner,
     show_diff => true,
     notify    => Service['qualys_agent'],
     require   => [

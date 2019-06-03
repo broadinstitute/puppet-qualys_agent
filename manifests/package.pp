@@ -29,7 +29,7 @@ class qualys_agent::package {
   file { $agent_paths :
     ensure  => 'directory',
     group   => $::qualys_agent::agent_group,
-    owner   => $::qualys_agent::agent_user,
+    owner   => $::qualys_agent::owner,
     require => User[$::qualys_agent::agent_user],
     recurse => true,
   }

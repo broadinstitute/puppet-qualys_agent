@@ -7,9 +7,10 @@
       Integer $process_priority,
       Integer $request_timeout,
       String $sudo_command,
+      Optional[String] $sudo_user,
       Integer $use_audit_dispatcher,
       Integer $use_sudo,
-      String $user,
+      Optional[String] $user,
       Optional[String] $user_group,
 | -%>
 # THIS FILE IS AUTOMATICALLY DISTRIBUTED BY PUPPET.
@@ -33,6 +34,8 @@ RequestTimeOut=<%= $request_timeout %>
 SudoCommand=<%= $sudo_command %>
 SudoUser=<%= $user %>
 UseAuditDispatcher=<%= $use_audit_dispatcher %>
+<% if $user { -%>
 User=<%= $user %>
+<% } -%>
 UserGroup=<%= $user_group %>
 UseSudo=<%= $use_sudo %>

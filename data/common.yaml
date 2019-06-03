@@ -2,7 +2,7 @@
 qualys_agent::ensure: present
 qualys_agent::activation_id: ~
 qualys_agent::agent_group: ~
-qualys_agent::agent_user: qualys_auth
+qualys_agent::agent_user: ~
 qualys_agent::agent_user_homedir: /usr/local/qualys
 qualys_agent::cmd_max_timeout: 1800
 qualys_agent::cmd_stdout_size: 1024

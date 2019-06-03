@@ -12,7 +12,7 @@ class qualys_agent::config::qagent_udc_log {
     group   => $::qualys_agent::agent_group,
     mode    => '0600',
     name    => "${qualys_agent::conf_dir}/qagent-udc-log.conf",
-    owner   => $::qualys_agent::agent_user,
+    owner   => $::qualys_agent::owner,
     notify    => Service['qualys_agent'],
     require   => [
       Package['qualys_agent'],

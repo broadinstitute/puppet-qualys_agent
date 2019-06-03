@@ -16,7 +16,7 @@
 # The group that should run the agent (Default: undef)
 #
 # * `agent_user`
-# The user that should run the agent (Default: qualys_auth)
+# The user that should run the agent (Default: undef)
 #
 # * `cmd_max_timeout`
 # The CmdMaxTimeOut value in qualys-cloud-agent.conf (Default: 1800)
@@ -61,6 +61,9 @@
 # * `sudo_command`
 # The SudoCommand value in qualys-cloud-agent.conf (Default: sudo)
 #
+# * `sudo_user`
+# The SudoUser value in qualys-cloud-agent.conf (Default: undef)
+#
 # * `use_audit_dispatcher`
 # The UseAuditDispatcher value in qualys-cloud-agent.conf (Default: 1)
 #
@@ -96,7 +99,7 @@ class qualys_agent (
   Enum['absent', 'present'] $ensure,
   String $activation_id,
   Optional[String] $agent_group,
-  String $agent_user,
+  Optional[String] $agent_user,
   Stdlib::Absolutepath $agent_user_homedir,
   Integer $cmd_max_timeout,
   Integer $cmd_stdout_size,
@@ -115,6 +118,7 @@ class qualys_agent (
   Enum['running', 'stopped'] $service_ensure,
   String $service_name,
   String $sudo_command,
+  Optional[String] $sudo_user,
   Integer $use_audit_dispatcher,
   Integer $use_sudo,
   Optional[String] $user_group,
@@ -124,6 +128,12 @@ class qualys_agent (
   # Protect against an bad setting for log_file_dir
   if $::qualys_agent::log_file_dir == '/' {
     fail('The log file directory is set to /.  Installation cannot continue.')
+  }
+
+  if $::qualys_agent::agent_user {
+    $owner = $::qualys_agent::agent_user
+  } else {
+    $owner = 'root'
   }
 
   contain 'qualys_agent::user'
