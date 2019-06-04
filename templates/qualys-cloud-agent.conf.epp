@@ -2,6 +2,7 @@
       Integer $cmd_max_timeout,
       Integer $cmd_stdout_size,
       String $customer_id,
+      Optional[Stdlib::Absolutepath] $hostid_search_dir,
       Stdlib::Absolutepath $log_file_dir,
       Integer $log_level,
       Integer $process_priority,
@@ -27,6 +28,9 @@ ActivationId=<%= $activation_id %>
 CmdMaxTimeOut=<%= $cmd_max_timeout %>
 CmdStdOutSize=<%= $cmd_stdout_size %>
 CustomerId=<%= $customer_id %>
+<% if $hostid_search_dir { -%>
+HostIdSearchDir=<%= $hostid_search_dir %>
+<% } -%>
 LogFileDir=<%= $log_file_dir %>
 LogLevel=<%= $log_level %>
 ProcessPriority=<%= $process_priority %>

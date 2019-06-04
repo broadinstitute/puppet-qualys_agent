@@ -13,12 +13,8 @@ class qualys_agent::config::qagent_log {
     mode    => '0600',
     name    => "${qualys_agent::conf_dir}/qagent-log.conf",
     owner   => $::qualys_agent::owner,
-    notify    => Service['qualys_agent'],
-    require   => [
-      Package['qualys_agent'],
-      User['qualys_user'],
-    ],
-
+    notify  => $::qualys_agent::service::service_dep,
+    require => $::qualys_agent::config::requires,
   }
 
 }
