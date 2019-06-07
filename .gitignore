@@ -27,3 +27,4 @@
 /inventory.yaml
 /.librarian
 /.tmp
+/spec/fixtures/work-dir

@@ -36,7 +36,7 @@ LogLevel=<%= $log_level %>
 ProcessPriority=<%= $process_priority %>
 RequestTimeOut=<%= $request_timeout %>
 SudoCommand=<%= $sudo_command %>
-SudoUser=<%= $user %>
+SudoUser=<%= $sudo_user %>
 UseAuditDispatcher=<%= $use_audit_dispatcher %>
 <% if $user { -%>
 User=<%= $user %>

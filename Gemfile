@@ -27,7 +27,8 @@ group :development do
   gem "puppet-module-posix-dev-r#{minor_version}",     require: false, platforms: [:ruby]
   gem "puppet-module-win-default-r#{minor_version}",   require: false, platforms: [:mswin, :mingw, :x64_mingw]
   gem "puppet-module-win-dev-r#{minor_version}",       require: false, platforms: [:mswin, :mingw, :x64_mingw]
-  gem "rspec-puppet-facts",                            require: false
+  gem "dpl",                                           require: false
+  gem "dpl-puppet_forge",                              require: false
 end
 
 puppet_version = ENV['PUPPET_GEM_VERSION']

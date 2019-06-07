@@ -1,0 +1,3 @@
+---
+qualys_agent::activation_id: 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX'
+qualys_agent::customer_id: 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX'

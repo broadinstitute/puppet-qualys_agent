@@ -5,43 +5,42 @@
 class qualys_agent::user {
 
   # Only manage the group if it is set
-  if ($::qualys_agent::manage_group) and (! empty($::qualys_agent::user_group)) and
-    ($::qualys_agent::user_group != 'root') {
-    $qualys_group = $::qualys_agent::user_group
+  if ($qualys_agent::manage_group) and (! empty($qualys_agent::agent_group)) and
+    ($qualys_agent::agent_group != 'root') {
+    $gid = $qualys_agent::agent_group
 
     group { 'qualys_group':
-      ensure => $::qualys_agent::ensure,
-      name   => $qualys_group,
+      ensure => $qualys_agent::ensure,
+      name   => $gid,
       system => true,
     }
 
     # Do not create an ordering dependency if we are removing the agent
-    $group_dep = $::qualys_agent::ensure ? {
+    $group_dep = $qualys_agent::ensure ? {
       present => Group['qualys_group'],
       absent  => undef,
     }
   } else {
-    $qualys_group = undef
+    $gid = undef
     $group_dep = undef
   }
 
-  if ($::qualys_agent::manage_user) and (! empty($::qualys_agent::agent_user)) and
-    ($::qualys_agent::agent_user != 'root') {
+  if ($qualys_agent::manage_user) and (! empty($qualys_agent::agent_user)) and
+    ($qualys_agent::agent_user != 'root') {
     user { 'qualys_user':
-      ensure   => $::qualys_agent::ensure,
+      ensure   => $qualys_agent::ensure,
       comment  => 'Qualys Cloud Agent User',
-      gid      => $qualys_group,
-      home     => $::qualys_agent::agent_user_homedir,
-      name     => $::qualys_agent::agent_user,
+      gid      => $gid,
+      home     => $qualys_agent::agent_user_homedir,
+      name     => $qualys_agent::agent_user,
       password => '*',
       system   => true,
-      before   => $::qualys_agent::package::package_dep,
       require  => $group_dep,
     }
 
     # Do not create an ordering dependency if we are removing the agent
-    $user_dep = $::qualys_agent::ensure ? {
-      present => User[$::qualys_agent::agent_user],
+    $user_dep = $qualys_agent::ensure ? {
+      present => User[$qualys_agent::agent_user],
       absent  => undef,
     }
   } else {

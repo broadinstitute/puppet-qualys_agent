@@ -1,19 +1,30 @@
 ---
 appveyor.yml:
   delete: true
-Gemfile:
+.gitignore:
   required:
-    ':development':
-      - gem: rspec-puppet-fact
+    - '/.librarian'
+    - '/.tmp'
+    - '/spec/fixtures/work-dir'
 .gitlab-ci.yml:
   delete: true
 Rakefile:
-  linter_options:
-    - ignore-paths=./spec/*
-    - no-80chars-check
-    - no-autoloader_layout-check
-    - no-puppet_url_without_modules-check
+  extra_disabled_lint_checks:
+    - '80chars'
+    - 'autoloader_layout'
+    - 'puppet_url_without_modules'
+  requires:
+    - 'puppet-lint/tasks/puppet-lint'
+Gemfile:
+  optional:
+    ':development':
+      - gem: 'dpl'
+      - gem: 'dpl-puppet_forge'
 .travis.yml:
   delete: true
 .yardopts:
   delete: true
+spec/default_facts.yml:
+  delete: true
+spec/spec_helper.rb:
+  hiera_config: 'spec/fixtures/hiera.yaml'
