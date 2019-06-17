@@ -11,16 +11,18 @@ Vagrant.configure(2) do |config|
   config.vm.hostname = "puppet-qualys-agent.example.com"
 
   config.vm.provider "virtualbox" do |vb|
-   vb.gui = false
-   vb.memory = "1024"
-   vb.name = "puppet-qualys-agent"
-   automount = true
+    vb.gui = false
+    vb.memory = "1024"
+    vb.name = "puppet-qualys-agent"
+    automount = true
   end
 
   config.vm.provision "file", source: "vagrant_files/global.yaml", destination: "/tmp/global.yaml"
   config.vm.provision "shell", path: "vagrant_files/centos7-p5.sh"
 
-  config.vm.synced_folder ".", "/etc/puppetlabs/code/modules/qualys_agent"
+  config.vm.synced_folder ".", "/etc/puppetlabs/code/modules/qualys_agent", type: "rsync",
+    rsync__verbose: true, rsync__args: ["--verbose", "--archive", "-z", "--copy-links"],
+    rsync__exclude: ["Gemfile.lock", ".git", "Vagrantfile", "vagrant_files"]
 
   config.ssh.insert_key = false
 end

@@ -1,8 +1,9 @@
 # qualys_agent
 
-[![Puppet Forge](https://img.shields.io/puppetforge/dt/broadinstitute/certs.svg)](https://forge.puppetlabs.com/broadinstitute/certs)
-[![Puppet Forge](https://img.shields.io/puppetforge/v/broadinstitute/certs.svg)](https://forge.puppetlabs.com/broadinstitute/certs)
-[![Puppet Forge](https://img.shields.io/puppetforge/f/broadinstitute/certs.svg)](https://forge.puppetlabs.com/broadinstitute/certs)
+[![CircleCI](https://circleci.com/gh/broadinstitute/workflows/puppet-qualys_agent/tree/master.svg?style=svg)](https://circleci.com/gh/broadinstitute/puppet-qualys_agent/tree/master)
+[![Puppet Forge](https://img.shields.io/puppetforge/dt/broadinstitute/qualys_agent.svg)](https://forge.puppetlabs.com/broadinstitute/qualys_agent)
+[![Puppet Forge](https://img.shields.io/puppetforge/v/broadinstitute/qualys_agent.svg)](https://forge.puppetlabs.com/broadinstitute/qualys_agent)
+[![Puppet Forge](https://img.shields.io/puppetforge/f/broadinstitute/qualys_agent.svg)](https://forge.puppetlabs.com/broadinstitute/qualys_agent)
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
 ## Table of Contents
@@ -47,7 +48,7 @@ puppet module install broadinstitute-qualys_agent
 
 #### Puppetfile
 
-``` sh
+```ruby
 mod 'broadinstitute/qualys_agent'
 ```
 
@@ -56,27 +57,20 @@ mod 'broadinstitute/qualys_agent'
 ### Puppet Manifest
 
 ```puppet
-  include certs
-  $domain = 'www.example.com'
-  certs::site { $domain:
-    source_path    => 'puppet:///site_certificates',
-    ca_cert        => true,
-    ca_name        => 'caname',
-    ca_source_path => 'puppet:///ca_certs',
-  }
+class { 'qualys_agent':
+  activation_id => 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',
+  customer_id   => 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',
+}
 ```
 
 ### With Hiera
 
 ```yaml
-  classes:
-    - certs
-  certs::sites:
-    'www.example.com':
-      source_path: 'puppet:///site_certificates'
-      ca_cert: true
-      ca_name: 'caname'
-      ca_source_path: 'puppet:///ca_certs'
+---
+classes:
+  - qualys_agent
+qualys_agent::activation_id: 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX'
+qualys_agent::customer_id: 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX'
 ```
 
 ### Running as a user other than root
@@ -107,7 +101,7 @@ The Activation ID you receive from Qualys for reporting back to their API **(req
 
 #### `agent_group`
 
-The group that should run the agent. **Default: undef**
+The group that should run the agent.  This also will be the UserGroup setting in the configuration file. **Default: undef**
 
 #### `agent_user`
 
@@ -210,16 +204,8 @@ The UseAuditDispatcher value in `qualys-cloud-agent.conf`. **Default: 1**
 
 The UseSudo value in `qualys-cloud-agent.conf`. **Default: 0**
 
-#### `user_group`
-
-The UserGroup value in `qualys-cloud-agent.conf`. **Default: undef**
-
 ## Limitations
 
 This has currently only been tested extensively on RedHat-based systems.
-
-## Release Notes
-
-* 1.0.0
 
 ## Contributors

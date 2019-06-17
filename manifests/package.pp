@@ -4,20 +4,19 @@
 #
 class qualys_agent::package {
 
-  if $::qualys_agent::manage_package {
+  if $qualys_agent::manage_package {
     # Force package remove if agent ensure is "absent"
-    $ensure = $::qualys_agent::ensure ? {
-      present => $::qualys_agent::package_ensure,
+    $ensure = $qualys_agent::ensure ? {
+      present => $qualys_agent::package_ensure,
       absent  => 'absent',
     }
 
     package { 'qualys_agent':
       ensure => $ensure,
-      name   => $::qualys_agent::package_name,
-      notify => $::qualys_agent::service::service_dep,
+      name   => $qualys_agent::package_name,
     }
     # Do not create an ordering dependency if we are removing the agent
-    $package_dep = $::qualys_agent::ensure ? {
+    $package_dep = $qualys_agent::ensure ? {
       present => Package['qualys_agent'],
       absent  => undef,
     }
@@ -30,15 +29,15 @@ class qualys_agent::package {
     '/usr/local/qualys',
     '/etc/qualys',
     '/var/spool/qualys',
-    $::qualys_agent::log_file_dir,
+    $qualys_agent::log_file_dir,
   ]
 
-  if $::qualys_agent::ensure != 'absent' {
+  if $qualys_agent::ensure != 'absent' {
     file { $agent_paths :
       ensure  => 'directory',
-      group   => $::qualys_agent::agent_group,
-      owner   => $::qualys_agent::owner,
-      require => $::qualys_agent::user::user_dep,
+      group   => $qualys_agent::group,
+      owner   => $qualys_agent::owner,
+      require => [$package_dep, $qualys_agent::user::user_dep, $qualys_agent::user::group_dep],
       recurse => true,
     }
   }

@@ -13,7 +13,7 @@
 # The Activation ID you receive from Qualys for reporting back to their API (required)
 #
 # * `agent_group`
-# The group that should run the agent (Default: undef)
+# The group that should run the agent.  This also will be the UserGroup setting in the configuration file. (Default: undef)
 #
 # * `agent_user`
 # The user that should run the agent (Default: undef)
@@ -92,9 +92,6 @@
 # * `use_sudo`
 # The UseSudo value in qualys-cloud-agent.conf (Default: 0)
 #
-# * `user_group`
-# The UserGroup value in qualys-cloud-agent.conf (Default: undef)
-#
 # Examples
 # --------
 #
@@ -133,6 +130,7 @@ class qualys_agent (
   Boolean $manage_package,
   Boolean $manage_service,
   Boolean $manage_user,
+  String $package_ensure,
   String $package_name,
   Integer $process_priority,
   Integer $request_timeout,
@@ -140,37 +138,36 @@ class qualys_agent (
   Enum['running', 'stopped'] $service_ensure,
   String $service_name,
   String $sudo_command,
-  Optional[String] $sudo_user,
+  String $sudo_user,
   Integer $use_audit_dispatcher,
   Integer $use_sudo,
-  Optional[String] $user_group,
 ) {
 
   # Protect against an bad setting for filesystem paths
-  if $::qualys_agent::agent_user_homedir == '/' {
+  if $qualys_agent::agent_user_homedir == '/' {
     fail('agent_user_homedir is set to /.  Installation cannot continue.')
   }
-  if $::qualys_agent::conf_dir == '/' {
+  if $qualys_agent::conf_dir == '/' {
     fail('conf_dir is set to /.  Installation cannot continue.')
   }
-  if $::qualys_agent::hostid_path == '/' {
+  if $qualys_agent::hostid_path == '/' {
     fail('hostid_path is set to /.  Installation cannot continue.')
   }
-  if $::qualys_agent::hostid_search_dir == '/' {
-    fail('hostid_path is set to /.  Installation cannot continue.')
+  if $qualys_agent::hostid_search_dir == '/' {
+    fail('hostid_search_dir is set to /.  Installation cannot continue.')
   }
-  if $::qualys_agent::log_file_dir == '/' {
+  if $qualys_agent::log_file_dir == '/' {
     fail('log_file_dir is set to /.  Installation cannot continue.')
   }
 
-  if $::qualys_agent::agent_user {
-    $owner = $::qualys_agent::agent_user
+  if $qualys_agent::agent_user {
+    $owner = $qualys_agent::agent_user
   } else {
     $owner = 'root'
   }
 
-  if $::qualys_agent::user_group {
-    $group = $::qualys_agent::user_group
+  if $qualys_agent::agent_group {
+    $group = $qualys_agent::agent_group
   } else {
     $group = 'root'
   }

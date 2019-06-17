@@ -1,0 +1,7 @@
+{
+    "name": "puppet-qualys_agent",
+    "image": "broadinstitute/puppet-runner:centos-7",
+    "extensions": [
+        "jpogran.puppet-vscode"
+    ]
+}
