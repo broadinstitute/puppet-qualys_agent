@@ -1,9 +1,9 @@
 # qualys_agent
 
-[![CircleCI](https://circleci.com/gh/broadinstitute/workflows/puppet-qualys_agent/tree/master.svg?style=svg)](https://circleci.com/gh/broadinstitute/puppet-qualys_agent/tree/master)
-[![Puppet Forge](https://img.shields.io/puppetforge/dt/broadinstitute/qualys_agent.svg)](https://forge.puppetlabs.com/broadinstitute/qualys_agent)
-[![Puppet Forge](https://img.shields.io/puppetforge/v/broadinstitute/qualys_agent.svg)](https://forge.puppetlabs.com/broadinstitute/qualys_agent)
-[![Puppet Forge](https://img.shields.io/puppetforge/f/broadinstitute/qualys_agent.svg)](https://forge.puppetlabs.com/broadinstitute/qualys_agent)
+[![CircleCI](https://circleci.com/gh/broadinstitute/puppet-qualys_agent/tree/master.svg?style=svg)](https://circleci.com/gh/broadinstitute/puppet-qualys_agent/tree/master)
+[![Puppet Forge](https://img.shields.io/puppetforge/dt/broadinstitute/qualys_agent.svg)](https://forge.puppet.com/broadinstitute/qualys_agent)
+[![Puppet Forge](https://img.shields.io/puppetforge/v/broadinstitute/qualys_agent.svg)](https://forge.puppet.com/broadinstitute/qualys_agent)
+[![Puppet Forge](https://img.shields.io/puppetforge/f/broadinstitute/qualys_agent.svg)](https://forge.puppet.com/broadinstitute/qualys_agent)
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
 ## Table of Contents
