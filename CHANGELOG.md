@@ -2,13 +2,12 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
-## [v0.9.1](https://github.com/broadinstitute/puppet-qualys_agent/tree/v0.9.1) (2019-06-19)
+## [0.9.1](https://github.com/broadinstitute/puppet-qualys_agent/tree/0.9.1) (2019-06-19)
 
-[Full Changelog](https://github.com/broadinstitute/puppet-qualys_agent/compare/0.9.0...v0.9.1)
+[Full Changelog](https://github.com/broadinstitute/puppet-qualys_agent/compare/0.9.0...0.9.1)
 
 ### Fixed
 
-- Fix URL for CircleCI badge [\#7](https://github.com/broadinstitute/puppet-qualys_agent/pull/7) ([coreone](https://github.com/coreone))
 - Fix service so that it will restart on any config file changes [\#6](https://github.com/broadinstitute/puppet-qualys_agent/pull/6) ([coreone](https://github.com/coreone))
 - Minor cleanup from the first release [\#5](https://github.com/broadinstitute/puppet-qualys_agent/pull/5) ([coreone](https://github.com/coreone))
 
