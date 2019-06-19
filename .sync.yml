@@ -15,11 +15,16 @@ Rakefile:
     - 'puppet_url_without_modules'
   requires:
     - 'puppet-lint/tasks/puppet-lint'
+  changelog_user: 'broadinstitute'
 Gemfile:
   optional:
     ':development':
       - gem: 'dpl'
       - gem: 'dpl-puppet_forge'
+      - gem: 'github_changelog_generator'
+        git: 'https://github.com/skywinder/github-changelog-generator'
+        ref: '20ee04ba1234e9e83eb2ffb5056e23d641c7a018'
+        condition: "Gem::Version.new(RUBY_VERSION.dup) >= Gem::Version.new('2.2.2')"
 .travis.yml:
   delete: true
 .yardopts:
