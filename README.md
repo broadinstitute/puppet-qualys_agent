@@ -1,6 +1,6 @@
 # qualys_agent
 
-[![CircleCI](https://circleci.com/gh/broadinstitute/puppet-qualys_agent/tree/master.svg?style=svg)](https://circleci.com/gh/broadinstitute/puppet-qualys_agent/tree/master)
+[![CircleCI](https://circleci.com/gh/broadinstitute/puppet-qualys_agent/tree/master.svg?style=svg)](https://circleci.com/gh/broadinstitute/puppet-qualys_agent)
 [![Puppet Forge](https://img.shields.io/puppetforge/dt/broadinstitute/qualys_agent.svg)](https://forge.puppet.com/broadinstitute/qualys_agent)
 [![Puppet Forge](https://img.shields.io/puppetforge/v/broadinstitute/qualys_agent.svg)](https://forge.puppet.com/broadinstitute/qualys_agent)
 [![Puppet Forge](https://img.shields.io/puppetforge/f/broadinstitute/qualys_agent.svg)](https://forge.puppet.com/broadinstitute/qualys_agent)
