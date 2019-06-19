@@ -19,12 +19,12 @@ class qualys_agent::service {
       ensure    => $ensure,
       enable    => $enable,
       name      => $qualys_agent::service_name,
-      require   => [
+      subscribe => [
         File['qualys_config'],
         File['qualys_log_config'],
         File['qualys_udc_log_config'],
+        $qualys_agent::package::package_dep,
       ],
-      subscribe => $qualys_agent::package::package_dep,
     }
 
     # Do not create an ordering dependency if we are removing the agent
