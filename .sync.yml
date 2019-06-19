@@ -9,13 +9,14 @@ appveyor.yml:
 .gitlab-ci.yml:
   delete: true
 Rakefile:
+  changelog_user: 'broadinstitute'
+  changelog_version_tag_pattern: '%s'
   extra_disabled_lint_checks:
     - '80chars'
     - 'autoloader_layout'
     - 'puppet_url_without_modules'
   requires:
     - 'puppet-lint/tasks/puppet-lint'
-  changelog_user: 'broadinstitute'
 Gemfile:
   optional:
     ':development':
