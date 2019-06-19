@@ -1,5 +1,5 @@
 {
-  "name": "puppet-qualys_agent",
+  "name": "broadinstitute-qualys_agent",
   "version": "0.9.1",
   "author": "Andrew Teixeira <teixeira@broadinstitute.org>",
   "summary": "Install and configure the Qualys Cloud Agent",

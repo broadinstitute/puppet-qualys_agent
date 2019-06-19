@@ -9,6 +9,7 @@ appveyor.yml:
 .gitlab-ci.yml:
   delete: true
 Rakefile:
+  changelog_project: 'puppet-qualys_agent'
   changelog_user: 'broadinstitute'
   changelog_version_tag_pattern: '%s'
   extra_disabled_lint_checks:
