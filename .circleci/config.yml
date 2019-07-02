@@ -1,138 +1,40 @@
 ---
 version: 2.1
-commands:
-  static:
-    description: 'Run all static analysis'
-    steps:
-      - run:
-          name: 'Symlink check'
-          command: 'bundle exec rake check:symlinks'
-      - run:
-          name: '.gitignore check'
-          command: 'bundle exec rake check:git_ignore'
-      - run:
-          name: 'dot_underscore check'
-          command: 'bundle exec rake check:dot_underscore'
-      - run:
-          name: 'test file check'
-          command: 'bundle exec rake check:test_file'
-      - run:
-          name: 'RuboCop check'
-          command: 'bundle exec rake rubocop'
-      - run:
-          name: 'Syntax check'
-          command: 'bundle exec rake syntax'
-      - run:
-          name: 'Lint check'
-          command: 'bundle exec rake lint'
-      - run:
-          name: 'Metadata lint check'
-          command: 'bundle exec rake metadata_lint'
-  prereq:
-    description: 'Install and cache unit test dependencies'
-    steps:
-      - restore_cache:
-          key: v1-{{ .Environment.CIRCLE_PROJECT_REPONAME }}-{{ checksum "Gemfile" }}-{{ .Environment.CIRCLE_JOB }}
-      - run:
-          name: 'Install Puppet dependencies'
-          command: |
-            gem update bundler --no-doc
-            rm -f Gemfile.lock
-            bundle install --with development --without system_tests --path=${BUNDLE_PATH:-vendor/bundle}
-      - run:
-          name: 'Install fixtures'
-          command: bundle exec rake spec_prep
-      - save_cache:
-          key: v1-{{ .Environment.CIRCLE_PROJECT_REPONAME }}-{{ checksum "Gemfile" }}-{{ .Environment.CIRCLE_JOB }}
-          paths:
-            - '/usr/local/bundle/ruby'
-  publish:
-    description: 'Publish the module to the Forge'
-    steps:
-      - run:
-          name: 'Publishing module with dpl'
-          command: 'bash .circleci/dpl-wrapper.sh'
-  unit-tests:
-    description: 'Run Puppet unit tests'
-    steps:
-      - run:
-          name: 'Run unit tests'
-          command: 'bundle exec rake spec'
-  verify-tag:
-    description: 'Verify the internal version vs. the git tag'
-    steps:
-      - run:
-          name: 'Verify git tag vs. metadata version'
-          command: 'python .circleci/verify.py'
-jobs:
-  static:
-    docker:
-      - image: 'circleci/ruby:2.4.6'
-    working_directory: '/tmp/build'
-    environment:
-      PUPPET_GEM_VERSION: '< 6.0.0'
-    steps:
-      - 'checkout'
-      - 'prereq'
-      - 'static'
-  run-tests:
-    parameters:
-      ruby_version:
-        type: 'string'
-        default: '2.4.6'
-      puppet_version:
-        type: 'string'
-        default: '< 6.0.0'
-    docker:
-      - image: circleci/ruby:<< parameters.ruby_version >>
-    environment:
-      PUPPET_GEM_VERSION: << parameters.puppet_version >>
-    working_directory: '/tmp/build'
-    steps:
-      - 'checkout'
-      - 'prereq'
-      - 'unit-tests'
-  deploy:
-    docker:
-      - image: circleci/ruby:2.4.6
-    environment:
-      PUPPET_GEM_VERSION: '< 6.0.0'
-    steps:
-      - 'checkout'
-      - 'prereq'
-      - 'verify-tag'
-      - 'publish'
+
+orbs:
+  puppet: 'broadinstitute/bits-puppet@0.1.0'
+
 workflows:
   static_analysis:
     jobs:
-      - 'static'
+      - puppet/static
   test_and_deploy:
     jobs:
-      - run-tests:
+      - puppet/run-tests:
           name: 'puppet-5-ruby-2.3.8'
           ruby_version: '2.3.8'
           puppet_version: '< 6.0.0'
-      - run-tests:
+      - puppet/run-tests:
           name: 'puppet-5-ruby-2.4.6'
           ruby_version: '2.4.6'
           puppet_version: '< 6.0.0'
-      - run-tests:
+      - puppet/run-tests:
           name: 'puppet-5-ruby-2.5.5'
           ruby_version: '2.5.5'
           puppet_version: '< 6.0.0'
-      - run-tests:
+      - puppet/run-tests:
           name: 'puppet-6-ruby-2.3.8'
           ruby_version: '2.3.8'
           puppet_version: '< 7.0.0'
-      - run-tests:
+      - puppet/run-tests:
           name: 'puppet-6-ruby-2.4.6'
           ruby_version: '2.4.6'
           puppet_version: '< 7.0.0'
-      - run-tests:
+      - puppet/run-tests:
           name: 'puppet-6-ruby-2.5.5'
           ruby_version: '2.5.5'
           puppet_version: '< 7.0.0'
-      - deploy:
+      - puppet/deploy:
           filters:
             tags:
               only: /[0-9]+(\.[0-9]+)*/
