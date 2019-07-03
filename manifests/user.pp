@@ -1,3 +1,4 @@
+#
 # @summary Configure the user and group to run the Qualys agent service
 #
 # Manage the system user and group that run the Qualys agent
