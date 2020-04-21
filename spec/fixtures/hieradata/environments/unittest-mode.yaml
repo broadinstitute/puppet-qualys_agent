@@ -1,0 +1,5 @@
+---
+qualys_agent::activation_id: 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX'
+qualys_agent::customer_id: 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX'
+qualys_agent::config::qagent_udc_log::mode: '0644'
+qualys_agent::config::qagent_log::mode: '0644'

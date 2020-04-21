@@ -12,7 +12,10 @@ qualys_agent::hostid_path: /etc/qualys/hostid
 qualys_agent::hostid_search_dir: ~
 qualys_agent::log_dest_type: file
 qualys_agent::log_file_dir: /var/log/qualys
+qualys_agent::log_group: ~
 qualys_agent::log_level: 3
+qualys_agent::log_mode: '0600'
+qualys_agent::log_owner: ~
 qualys_agent::manage_group: true
 qualys_agent::manage_package: true
 qualys_agent::manage_service: true

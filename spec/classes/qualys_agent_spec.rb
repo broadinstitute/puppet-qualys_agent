@@ -20,7 +20,7 @@ describe 'qualys_agent' do
       context 'with correct activation_id and customer_id' do
         let(:environment) { 'unittest' }
 
-        dirnames = ['/usr/local/qualys', '/etc/qualys', '/var/spool/qualys', '/var/log/qualys']
+        dirnames = ['/usr/local/qualys', '/etc/qualys', '/var/spool/qualys']
 
         context 'with default values for all parameters' do
           it do
@@ -148,6 +148,34 @@ UseSudo=0}
               .with(ensure: 'installed', name: 'qualys-cloud-agent')
           end
 
+          it do
+            is_expected.to contain_file('/var/log/qualys').with(
+              ensure: 'directory',
+              group: 'root',
+              owner: 'root',
+              recurse: false,
+              require: 'Package[qualys_agent]',
+            )
+          end
+          it do
+            is_expected.to contain_file('/var/log/qualys/qualys-cloud-agent.log').with(
+              ensure: 'file',
+              group: 'root',
+              mode: '0600',
+              owner: 'root',
+              require: 'File[/var/log/qualys]',
+            )
+          end
+          it do
+            is_expected.to contain_file('/var/log/qualys/qualys-udc-scan.log').with(
+              ensure: 'file',
+              group: 'root',
+              mode: '0600',
+              owner: 'root',
+              require: 'File[/var/log/qualys]',
+            )
+          end
+
           dirnames.each do |directory|
             it do
               is_expected.to contain_file(directory).with(
@@ -253,6 +281,19 @@ UseSudo=0}
             )
           end
 
+          it do
+            is_expected.to contain_file('/var/log/qualys').with(
+              group: 'newgrp',
+              require: 'Package[qualys_agent]',
+            )
+          end
+          it do
+            is_expected.to contain_file('/var/log/qualys/qualys-cloud-agent.log').with(group: 'newgrp')
+          end
+          it do
+            is_expected.to contain_file('/var/log/qualys/qualys-udc-scan.log').with(group: 'newgrp')
+          end
+
           dirnames.each do |directory|
             it do
               is_expected.to contain_file(directory).with(
@@ -312,6 +353,19 @@ UseSudo=0}
               system: true,
               require: nil,
             )
+          end
+
+          it do
+            is_expected.to contain_file('/var/log/qualys').with(
+              owner: 'newuser',
+              require: 'Package[qualys_agent]',
+            )
+          end
+          it do
+            is_expected.to contain_file('/var/log/qualys/qualys-cloud-agent.log').with(owner: 'newuser')
+          end
+          it do
+            is_expected.to contain_file('/var/log/qualys/qualys-udc-scan.log').with(owner: 'newuser')
           end
 
           dirnames.each do |directory|
@@ -382,6 +436,26 @@ UseSudo=0}
               password: '*',
               system: true,
               require: 'Group[qualys_group]',
+            )
+          end
+
+          it do
+            is_expected.to contain_file('/var/log/qualys').with(
+              group: 'newgrp',
+              owner: 'newuser',
+              require: 'Package[qualys_agent]',
+            )
+          end
+          it do
+            is_expected.to contain_file('/var/log/qualys/qualys-cloud-agent.log').with(
+              group: 'newgrp',
+              owner: 'newuser',
+            )
+          end
+          it do
+            is_expected.to contain_file('/var/log/qualys/qualys-udc-scan.log').with(
+              group: 'newgrp',
+              owner: 'newuser',
             )
           end
 
@@ -579,6 +653,19 @@ UseSudo=1}
             is_expected.not_to contain_group('qualys_group')
           end
 
+          it do
+            is_expected.to contain_file('/var/log/qualys').with(
+              group: 'newgrp',
+              require: 'Package[qualys_agent]',
+            )
+          end
+          it do
+            is_expected.to contain_file('/var/log/qualys/qualys-cloud-agent.log').with(group: 'newgrp')
+          end
+          it do
+            is_expected.to contain_file('/var/log/qualys/qualys-udc-scan.log').with(group: 'newgrp')
+          end
+
           dirnames.each do |directory|
             it do
               is_expected.to contain_file(directory).with(group: 'newgrp', require: ['Package[qualys_agent]'])
@@ -619,6 +706,16 @@ UseSudo=1}
 
           it do
             is_expected.not_to contain_package('qualys_agent')
+          end
+
+          it do
+            is_expected.to contain_file('/var/log/qualys').with(require: nil)
+          end
+          it do
+            is_expected.to contain_file('/var/log/qualys/qualys-cloud-agent.log')
+          end
+          it do
+            is_expected.to contain_file('/var/log/qualys/qualys-udc-scan.log')
           end
 
           dirnames.each do |directory|
@@ -671,6 +768,16 @@ UseSudo=1}
             is_expected.not_to contain_user('qualys_user')
           end
 
+          it do
+            is_expected.to contain_file('/var/log/qualys').with(owner: 'newuser', require: 'Package[qualys_agent]')
+          end
+          it do
+            is_expected.to contain_file('/var/log/qualys/qualys-cloud-agent.log').with(owner: 'newuser')
+          end
+          it do
+            is_expected.to contain_file('/var/log/qualys/qualys-udc-scan.log').with(owner: 'newuser')
+          end
+
           dirnames.each do |directory|
             it do
               is_expected.to contain_file(directory).with(owner: 'newuser', require: ['Package[qualys_agent]'])
@@ -701,6 +808,93 @@ UseSudo=1}
               owner: 'newuser',
               require: ['Package[qualys_agent]'],
             )
+          end
+        end
+
+        context 'log_group set to "newgroup"' do
+          let(:params) do
+            { log_group: 'newgroup' }
+          end
+
+          it do
+            is_expected.to contain_file('/var/log/qualys').with(group: 'newgroup')
+          end
+          it do
+            is_expected.to contain_file('/var/log/qualys/qualys-cloud-agent.log').with(group: 'newgroup')
+          end
+          it do
+            is_expected.to contain_file('/var/log/qualys/qualys-udc-scan.log').with(group: 'newgroup')
+          end
+
+          dirnames.each do |directory|
+            it do
+              is_expected.to contain_file(directory).with(group: 'root')
+            end
+          end
+          it do
+            is_expected.to contain_file('qualys_config').with(group: 'root')
+          end
+          it do
+            is_expected.to contain_file('qualys_properties').with(group: 'root')
+          end
+          it do
+            is_expected.to contain_file('qualys_hostid').with(group: 'root')
+          end
+          it do
+            is_expected.to contain_file('qualys_log_config').with(group: 'root')
+          end
+          it do
+            is_expected.to contain_file('qualys_udc_log_config').with(group: 'root')
+          end
+        end
+
+        context 'log_owner set to "newuser"' do
+          let(:params) do
+            { log_owner: 'newuser' }
+          end
+
+          it do
+            is_expected.to contain_file('/var/log/qualys').with(owner: 'newuser')
+          end
+          it do
+            is_expected.to contain_file('/var/log/qualys/qualys-cloud-agent.log').with(owner: 'newuser')
+          end
+          it do
+            is_expected.to contain_file('/var/log/qualys/qualys-udc-scan.log').with(owner: 'newuser')
+          end
+
+          dirnames.each do |directory|
+            it do
+              is_expected.to contain_file(directory).with(owner: 'root')
+            end
+          end
+          it do
+            is_expected.to contain_file('qualys_config').with(owner: 'root')
+          end
+          it do
+            is_expected.to contain_file('qualys_properties').with(owner: 'root')
+          end
+          it do
+            is_expected.to contain_file('qualys_hostid').with(owner: 'root')
+          end
+          it do
+            is_expected.to contain_file('qualys_log_config').with(owner: 'root')
+          end
+          it do
+            is_expected.to contain_file('qualys_udc_log_config').with(owner: 'root')
+          end
+        end
+
+        context 'log file mode set to 0644' do
+          let(:params) do
+            { log_mode: '0644' }
+          end
+
+          it do
+            is_expected.to contain_file('/var/log/qualys/qualys-cloud-agent.log').with(mode: '0644')
+          end
+          it do
+            is_expected.to contain_file('/var/log/qualys/qualys-udc-scan.log').with(mode: '0644')
           end
         end
 
@@ -758,7 +952,17 @@ UseSudo=1}
             is_expected.to contain_package('qualys_agent').with(ensure: 'absent')
           end
 
-          # Will not remove these directories as they are part of the package
+          # Will not manage these files/directories when "absent"
+          it do
+            is_expected.not_to contain_file('/var/log/qualys')
+          end
+          it do
+            is_expected.not_to contain_file('/var/log/qualys/qualys-cloud-agent.log')
+          end
+          it do
+            is_expected.not_to contain_file('/var/log/qualys/qualys-udc-scan.log')
+          end
+
           dirnames.each do |directory|
             it do
               is_expected.not_to contain_file(directory)
