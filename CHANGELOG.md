@@ -11,6 +11,10 @@ All notable changes to this project will be documented in this file. The format 
 - Allow permissions to be set differently on Qualys logs [\#12](https://github.com/broadinstitute/puppet-qualys_agent/pull/12) ([coreone](https://github.com/coreone))
 - Change metadata.json to allow stdlib version 6 [\#11](https://github.com/broadinstitute/puppet-qualys_agent/pull/11) ([mbarnesBHR](https://github.com/mbarnesBHR))
 
+### Fixed
+
+- Fix metadata.json to allow for auto-deploy [\#14](https://github.com/broadinstitute/puppet-qualys_agent/pull/14) ([coreone](https://github.com/coreone))
+
 ## [0.9.1](https://github.com/broadinstitute/puppet-qualys_agent/tree/0.9.1) (2019-06-19)
 
 [Full Changelog](https://github.com/broadinstitute/puppet-qualys_agent/compare/0.9.0...0.9.1)
