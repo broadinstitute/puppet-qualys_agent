@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
+## [0.9.2](https://github.com/broadinstitute/puppet-qualys_agent/tree/0.9.2) (2020-04-22)
+
+[Full Changelog](https://github.com/broadinstitute/puppet-qualys_agent/compare/0.9.1...0.9.2)
+
+### Added
+
+- Allow permissions to be set differently on Qualys logs [\#12](https://github.com/broadinstitute/puppet-qualys_agent/pull/12) ([coreone](https://github.com/coreone))
+- Change metadata.json to allow stdlib version 6 [\#11](https://github.com/broadinstitute/puppet-qualys_agent/pull/11) ([mbarnesBHR](https://github.com/mbarnesBHR))
+
 ## [0.9.1](https://github.com/broadinstitute/puppet-qualys_agent/tree/0.9.1) (2019-06-19)
 
 [Full Changelog](https://github.com/broadinstitute/puppet-qualys_agent/compare/0.9.0...0.9.1)
