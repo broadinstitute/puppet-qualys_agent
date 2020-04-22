@@ -29,7 +29,6 @@ class qualys_agent::package {
     '/usr/local/qualys',
     '/etc/qualys',
     '/var/spool/qualys',
-    $qualys_agent::log_file_dir,
   ]
 
   if $qualys_agent::ensure != 'absent' {
@@ -39,6 +38,13 @@ class qualys_agent::package {
       owner   => $qualys_agent::owner,
       require => [$package_dep, $qualys_agent::user::user_dep, $qualys_agent::user::group_dep],
       recurse => true,
+    }
+    file { $qualys_agent::log_file_dir :
+      ensure  => 'directory',
+      group   => $qualys_agent::log_group_final,
+      owner   => $qualys_agent::log_owner_final,
+      require => $package_dep,
+      recurse => false,
     }
   }
 }

@@ -43,8 +43,17 @@
 # The LogFileDir value in qualys-cloud-agent.conf
 # The directory in which the log files should be written (Default: /var/log/qualys)
 #
+# * `log_group`
+# The group that should own files in the log directory (Default: $agent_group)
+#
 # * `log_level`
 # The LogLevel value in qualys-cloud-agent.conf (Default: 3)
+#
+# * `log_mode`
+# The file mode for log files in $log_file_dir (Default: 0600)
+#
+# * `log_owner`
+# The user that should own files in the log directory (Default: $agent_user)
 #
 # * `manage_group`
 # Boolean to determine whether the group is managed by Puppet or not (Default: true)
@@ -125,7 +134,10 @@ class qualys_agent (
   Optional[Stdlib::Absolutepath] $hostid_search_dir,
   Enum['file', 'syslog'] $log_dest_type,
   Stdlib::Absolutepath $log_file_dir,
+  Optional[String] $log_group,
   Integer $log_level,
+  String $log_mode,
+  Optional[String] $log_owner,
   Boolean $manage_group,
   Boolean $manage_package,
   Boolean $manage_service,
@@ -160,16 +172,28 @@ class qualys_agent (
     fail('log_file_dir is set to /.  Installation cannot continue.')
   }
 
+  if $qualys_agent::agent_group {
+    $group = $qualys_agent::agent_group
+  } else {
+    $group = 'root'
+  }
+
   if $qualys_agent::agent_user {
     $owner = $qualys_agent::agent_user
   } else {
     $owner = 'root'
   }
 
-  if $qualys_agent::agent_group {
-    $group = $qualys_agent::agent_group
+  if $qualys_agent::log_group {
+    $log_group_final = $qualys_agent::log_group
   } else {
-    $group = 'root'
+    $log_group_final = $group
+  }
+
+  if $qualys_agent::log_owner {
+    $log_owner_final = $qualys_agent::log_owner
+  } else {
+    $log_owner_final = $owner
   }
 
   contain 'qualys_agent::user'
