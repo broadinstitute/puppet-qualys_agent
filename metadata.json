@@ -1,7 +1,7 @@
 {
   "name": "broadinstitute-qualys_agent",
   "version": "0.9.2",
-  "author": "Andrew Teixeira <teixeira@broadinstitute.org>",
+  "author": "broadinstitute",
   "summary": "Install and configure the Qualys Cloud Agent",
   "license": "BSD-3-Clause",
   "source": "https://github.com/broadinstitute/puppet-qualys_agent",
