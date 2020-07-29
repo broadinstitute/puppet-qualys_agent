@@ -10,11 +10,33 @@ class qualys_agent::package {
       present => $qualys_agent::package_ensure,
       absent  => 'absent',
     }
+  if $qualys_agent::download_package {
+    archive { "/tmp/$qualys_agent::package_filename":
+      ensure       => present,
+      source       => $qualys_agent::package_url,
+      proxy_server => $qualys_agent::proxy,
+    }
 
+    $provider = $facts['osfamily'] ? {
+      'RedHat' => yum,
+      default => dpkg
+    }
+
+    package { 'qualys_agent':
+      ensure   => $ensure,
+      source   => "/tmp/$qualys_agent::package_filename",
+      name     => $qualys_agent::package_name,
+      provider => $provider
+
+
+    }
+  } else {
     package { 'qualys_agent':
       ensure => $ensure,
       name   => $qualys_agent::package_name,
     }
+  }
+
     # Do not create an ordering dependency if we are removing the agent
     $package_dep = $qualys_agent::ensure ? {
       present => Package['qualys_agent'],

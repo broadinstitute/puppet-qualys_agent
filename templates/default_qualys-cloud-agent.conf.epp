@@ -1,0 +1,9 @@
+<%- |
+      Optional[String] $qualys_https_proxy,
+| -%>
+# THIS FILE IS AUTOMATICALLY DISTRIBUTED BY PUPPET.
+# ANY CHANGES WILL BE OVERWRITTEN.
+
+#Config File
+# qualys_https_proxy
+qualys_https_proxy=<%= $qualys_https_proxy %>

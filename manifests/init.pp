@@ -101,6 +101,19 @@
 # * `use_sudo`
 # The UseSudo value in qualys-cloud-agent.conf (Default: 0)
 #
+# * `proxy`
+# proxy URL to use for downloading package and reach qualys cloud platform  (Default: undef)
+# When set variable is set in /etc/default/qualys-cloud-agent for Debian
+#
+# * `package_url`
+# Full URL where to download the package (Default: undef)
+#
+# * `package_filename`
+# Exact package name (Default : qualys-cloud-agent.x86_64.deb)
+#
+# * `download_package`
+# Boolean should this module download the package (Default: undef)
+#
 # Examples
 # --------
 #
@@ -153,6 +166,10 @@ class qualys_agent (
   String $sudo_user,
   Integer $use_audit_dispatcher,
   Integer $use_sudo,
+  String $package_filename,
+  Boolean $download_package,
+  String $package_url,
+  Optional[String] $proxy
 ) {
 
   # Protect against an bad setting for filesystem paths
