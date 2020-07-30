@@ -18,7 +18,7 @@ class qualys_agent::package {
     }
 
     $provider = $facts['osfamily'] ? {
-      'RedHat' => yum,
+      'RedHat' => rpm,
       default => dpkg
     }
 
