@@ -31,7 +31,7 @@ qualys_agent::sudo_command: sudo
 qualys_agent::sudo_user: root
 qualys_agent::use_audit_dispatcher: 1
 qualys_agent::use_sudo: 0
-qualys_agent::package_filename: qualys-cloud-agent.x86_64.deb
+qualys_agent::package_filename: ~
 qualys_agent::download_package: false
 qualys_agent::package_url: ~
 qualys_agent::proxy: ~

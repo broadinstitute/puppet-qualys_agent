@@ -166,7 +166,7 @@ class qualys_agent (
   String $sudo_user,
   Integer $use_audit_dispatcher,
   Integer $use_sudo,
-  String $package_filename,
+  Optional[String] $package_filename,
   Boolean $download_package,
   String $package_url,
   Optional[String] $proxy
@@ -211,6 +211,16 @@ class qualys_agent (
     $log_owner_final = $qualys_agent::log_owner
   } else {
     $log_owner_final = $owner
+  }
+
+  if $qualys_agent::package_filename {
+    $package_filename_final = $qualys_agent::package_filename
+  }
+  else {
+    $package_filename_final = $facts['osfamily'] ? {
+      'RedHat' => 'qualys-cloud-agent.x86_64.rpm',
+      default => 'qualys-cloud-agent.x86_64.deb'
+    }
   }
 
   contain 'qualys_agent::user'

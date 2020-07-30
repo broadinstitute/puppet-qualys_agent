@@ -11,7 +11,7 @@ class qualys_agent::package {
       absent  => 'absent',
     }
   if $qualys_agent::download_package {
-    archive { "/tmp/$qualys_agent::package_filename":
+    archive { "/tmp/$qualys_agent::package_filename_final":
       ensure       => present,
       source       => $qualys_agent::package_url,
       proxy_server => $qualys_agent::proxy,
@@ -24,7 +24,7 @@ class qualys_agent::package {
 
     package { 'qualys_agent':
       ensure   => $ensure,
-      source   => "/tmp/$qualys_agent::package_filename",
+      source   => "/tmp/$qualys_agent::package_filename_final",
       name     => $qualys_agent::package_name,
       provider => $provider
 
