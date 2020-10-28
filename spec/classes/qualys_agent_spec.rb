@@ -259,6 +259,7 @@ UseSudo=0}
                 name: 'qualys-cloud-agent',
                 subscribe: [
                   'File[qualys_config]',
+                  'File[qualys_env]',
                   'File[qualys_log_config]',
                   'File[qualys_udc_log_config]',
                   'Package[qualys_agent]',
@@ -742,6 +743,7 @@ UseSudo=1}
             is_expected.to contain_service('qualys_agent').with(
               subscribe: [
                 'File[qualys_config]',
+                'File[qualys_env]',
                 'File[qualys_log_config]',
                 'File[qualys_udc_log_config]',
               ],

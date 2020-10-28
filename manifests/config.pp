@@ -88,6 +88,19 @@ class qualys_agent::config {
     owner   => $qualys_agent::owner,
     require => $requires,
   }
+  file { 'qualys_env':
+    ensure    => $ensure,
+    content   => epp('qualys_agent/qualys-cloud-agent.environment.epp', {
+      https_proxy        => $qualys_agent::https_proxy,
+      qualys_https_proxy => $qualys_agent::qualys_https_proxy,
+    }),
+    group     => $qualys_agent::group,
+    mode      => '0600',
+    path      => "${qualys_agent::env_dir}/qualys-cloud-agent",
+    owner     => $qualys_agent::owner,
+    show_diff => true,
+    require   => $requires,
+  }
 
   include qualys_agent::config::qagent_log
   include qualys_agent::config::qagent_udc_log
