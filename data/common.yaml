@@ -8,8 +8,10 @@ qualys_agent::cmd_max_timeout: 1800
 qualys_agent::cmd_stdout_size: 1024
 qualys_agent::conf_dir: /etc/qualys/cloud-agent
 qualys_agent::customer_id: ~
+qualys_agent::env_dir: /etc/default
 qualys_agent::hostid_path: /etc/qualys/hostid
 qualys_agent::hostid_search_dir: ~
+qualys_agent::https_proxy: ~
 qualys_agent::log_dest_type: file
 qualys_agent::log_file_dir: /var/log/qualys
 qualys_agent::log_group: ~
@@ -23,6 +25,7 @@ qualys_agent::manage_user: true
 qualys_agent::package_ensure: installed
 qualys_agent::package_name: qualys-cloud-agent
 qualys_agent::process_priority: 0
+qualys_agent::qualys_https_proxy: ~
 qualys_agent::request_timeout: 600
 qualys_agent::service_enable: true
 qualys_agent::service_ensure: running

@@ -1,0 +1,15 @@
+<%- |
+  Optional[String] $https_proxy,
+  Optional[String] $qualys_https_proxy,
+| -%>
+# THIS FILE IS AUTOMATICALLY DISTRIBUTED BY PUPPET.
+# ANY CHANGES WILL BE OVERWRITTEN.
+
+# Environment Variables used by qualys-cloud-agent service.
+
+<% unless $https_proxy =~ Undef { -%>
+https_proxy=<%= $https_proxy %>
+<% } -%>
+<% unless $qualys_https_proxy =~ Undef { -%>
+qualys_https_proxy=<%= $qualys_https_proxy %>
+<% } -%>

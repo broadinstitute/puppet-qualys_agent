@@ -21,6 +21,7 @@ class qualys_agent::service {
       name      => $qualys_agent::service_name,
       subscribe => [
         File['qualys_config'],
+        File['qualys_env'],
         File['qualys_log_config'],
         File['qualys_udc_log_config'],
         $qualys_agent::package::package_dep,
