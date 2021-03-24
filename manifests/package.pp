@@ -1,3 +1,4 @@
+#
 # @summary Manage the Qualys agent's package installation
 #
 # Install or uninstall the Qualys agent package

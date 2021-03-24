@@ -1,6 +1,5 @@
-# Class: qualys_agent::config::qagent_log
 #
-# Manage the main qagent-log.conf configuration file
+# @summary Manage the main qagent-log.conf configuration file
 #
 class qualys_agent::config::qagent_log {
 

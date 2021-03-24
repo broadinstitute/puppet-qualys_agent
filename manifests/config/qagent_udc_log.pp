@@ -1,6 +1,5 @@
-# Class: qualys_agent::config::qagent_udc_log
 #
-# Manage the main qagent-udc-log.conf configuration file
+# @summary Manage the main qagent-udc-log.conf configuration file
 #
 class qualys_agent::config::qagent_udc_log {
 

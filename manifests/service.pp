@@ -1,3 +1,4 @@
+#
 # @summary Configure the Qualys agent service
 #
 # Manage the system service that runs the Qualys agent

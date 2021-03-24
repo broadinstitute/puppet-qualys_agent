@@ -1,3 +1,4 @@
+#
 # @summary Configure the Qualys agent
 #
 # Manage the main qualys-cloud-agent.conf configuration file.  This class also includes the `qagent_log` and
