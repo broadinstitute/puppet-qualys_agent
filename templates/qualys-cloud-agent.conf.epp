@@ -2,6 +2,7 @@
       Integer $cmd_max_timeout,
       Integer $cmd_stdout_size,
       String $customer_id,
+      Optional[String] $webservice_uri,
       Optional[Stdlib::Absolutepath] $hostid_search_dir,
       Stdlib::Absolutepath $log_file_dir,
       Integer $log_level,
@@ -43,3 +44,6 @@ User=<%= $user %>
 <% } -%>
 UserGroup=<%= $user_group %>
 UseSudo=<%= $use_sudo %>
+<% if $webservice_uri { -%>
+ServerUri=<%= $webservice_uri %>
+<% } -%>

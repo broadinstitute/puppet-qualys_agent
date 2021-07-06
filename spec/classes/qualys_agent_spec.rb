@@ -535,6 +535,7 @@ UseSudo=0}
               sudo_user: 'someuser',
               use_audit_dispatcher: 0,
               use_sudo: 1,
+              webservice_uri: 'https://localhost/CloudAgent/',
             }
           end
 
@@ -551,7 +552,8 @@ SudoCommand=othersudo
 SudoUser=someuser
 UseAuditDispatcher=0
 UserGroup=
-UseSudo=1}
+UseSudo=1
+WebServiceUri=https://localhost/CloudAgent/}
 
           it do
             is_expected.to contain_file('/tmp/logs').with(
