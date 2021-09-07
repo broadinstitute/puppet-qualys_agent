@@ -98,6 +98,21 @@
 #
 # @param service_ensure
 #   Ensure that the Qualys agent is running on the system, or stopped (Default: `running`)
+# * `proxy_url`
+# proxy URL to use for downloading package and reach qualys cloud platform  (Default: undef)
+# When set variable is set in /etc/default/qualys-cloud-agent for Debian
+#
+# * `proxy_user`
+# proxy user to authenticate (Default: undef)
+#
+# * `proxy_password`
+# proxy password if needed to authenticate  (Default: undef)
+#
+# * `proxy_port`
+# configure the port of the proxy  (Default: 3128)
+#
+# Examples
+# --------
 #
 # @param service_name
 #   The name of the Qualys agent service (Default: `qualys-cloud-agent`)
@@ -150,6 +165,10 @@ class qualys_agent (
   String $sudo_user,
   Integer $use_audit_dispatcher,
   Integer $use_sudo,
+  Optional[String] $proxy_url,
+  Optional[String] $proxy_user,
+  Optional[String] $proxy_password,
+  Optional[Integer] $proxy_port,
 ) {
 
   # Protect against an bad setting for filesystem paths

@@ -103,6 +103,29 @@ class qualys_agent::config {
     require   => $requires,
   }
 
+  if $qualys_agent::proxy {
+    $default_conf_path = $facts['osfamily'] ? {
+      'RedHat' => '/etc/sysconfig/qualys-cloud-agent',
+      default => '/etc/default/qualys-cloud-agent'
+    }
+
+    file { 'default_qualys_properties_proxy':
+      ensure    => $ensure,
+      content   => epp('qualys_agent/default_qualys-cloud-agent.conf.epp', {
+        qualys_https_proxy_url       => $qualys_agent::proxy_url,
+        qualys_https_proxy_port      => $qualys_agent::proxy_port,
+        qualys_https_proxy_user      => $qualys_agent::proxy_user,
+        qualys_https_proxy_password  => $qualys_agent::proxy_password,
+      }),
+      group     => $qualys_agent::group,
+      mode      => '0600',
+      path      => $default_conf_path,
+      owner     => $qualys_agent::owner,
+      show_diff => true,
+      require   => $requires,
+    }
+  }
+
   include qualys_agent::config::qagent_log
   include qualys_agent::config::qagent_udc_log
 }

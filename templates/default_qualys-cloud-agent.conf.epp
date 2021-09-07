@@ -1,0 +1,21 @@
+  
+<%- |
+      Optional[String] $qualys_https_proxy_url,
+      Optional[Integer] $qualys_https_proxy_port,
+      Optional[String] $qualys_https_proxy_user,
+      Optional[String] $qualys_https_proxy_password,
+| -%>
+# THIS FILE IS AUTOMATICALLY DISTRIBUTED BY PUPPET.
+# ANY CHANGES WILL BE OVERWRITTEN.
+
+#Config File
+# qualys_https_proxy
+<% if $qualys_https_proxy_user { -%>
+qualys_https_proxy=http://$:<password>@]<host>[:<port>]<%= $qualys_https_proxy %>
+<% } -%>
+
+<% if $qualys_https_proxy_user { -%>
+qualys_https_proxy=http://<%= $qualys_https_user %>:<%= $qualys_https_proxy_password %>@<%= $qualys_https_proxy_url %>:<%= $qualys_https_proxy_port %>
+<% } else { -%>
+qualys_https_proxy=http://<%= $qualys_https_proxy_url %>
+<% } -%>

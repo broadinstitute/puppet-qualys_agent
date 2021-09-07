@@ -34,3 +34,7 @@ qualys_agent::sudo_command: sudo
 qualys_agent::sudo_user: root
 qualys_agent::use_audit_dispatcher: 1
 qualys_agent::use_sudo: 0
+qualys_agent::proxy_url: ~
+qualys_agent::proxy_user: ~
+qualys_agent::proxy_password: ~
+qualys_agent::proxy_port: 3128
