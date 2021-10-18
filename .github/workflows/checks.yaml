@@ -116,8 +116,3 @@ jobs:
 
       - name: 'Run unit tests'
         run: 'bundle exec rake spec:simplecov'
-
-      - name: 'Upload to codecov'
-        uses: codecov/codecov-action@v2.1.0
-        with:
-          files: ./rspec.xml
