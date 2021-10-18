@@ -535,6 +535,7 @@ UseSudo=0}
               sudo_user: 'someuser',
               use_audit_dispatcher: 0,
               use_sudo: 1,
+              webservice_uri: 'https://localhost/CloudAgent/',
             }
           end
 
@@ -547,6 +548,7 @@ LogFileDir=/tmp/logs
 LogLevel=5
 ProcessPriority=5
 RequestTimeOut=300
+ServiceUri=https://localhost/CloudAgent/
 SudoCommand=othersudo
 SudoUser=someuser
 UseAuditDispatcher=0

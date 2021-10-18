@@ -114,6 +114,9 @@
 # @param use_sudo
 #   The UseSudo value in qualys-cloud-agent.conf (Default: `0`)
 #
+# @param webservice_uri
+#   The ServerUri value in qualys-cloud-agent.conf (Default: `undef`)
+#
 class qualys_agent (
   Enum['absent', 'present'] $ensure,
   String $activation_id,
@@ -150,6 +153,7 @@ class qualys_agent (
   String $sudo_user,
   Integer $use_audit_dispatcher,
   Integer $use_sudo,
+  Optional[String] $webservice_uri,
 ) {
 
   # Protect against an bad setting for filesystem paths
