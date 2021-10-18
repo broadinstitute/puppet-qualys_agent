@@ -16,10 +16,10 @@ jobs:
 
     steps:
       - name: 'Checkout repo'
-        uses: 'actions/checkout@v2'
+        uses: 'actions/checkout@v2.3.5'
 
       - name: 'Set up Ruby'
-        uses: 'ruby/setup-ruby@v1.66.0'
+        uses: 'ruby/setup-ruby@v1.83.0'
         with:
           ruby-version: '2.4'
 
@@ -29,7 +29,7 @@ jobs:
           echo ::set-output name=version::$(ruby -e 'puts RUBY_VERSION')
 
       - name: 'Cache Ruby'
-        uses: 'actions/cache@v1'
+        uses: 'actions/cache@v2.1.6'
         with:
           path: 'vendor/bundle'
           key: ${{ runner.os }}-${{ steps.full-ruby-version.outputs.version }}-v1-gems-${{ hashFiles('**/Gemfile.lock') }}

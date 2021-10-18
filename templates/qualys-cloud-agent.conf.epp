@@ -37,7 +37,7 @@ LogLevel=<%= $log_level %>
 ProcessPriority=<%= $process_priority %>
 RequestTimeOut=<%= $request_timeout %>
 <% if $webservice_uri { -%>
-ServiceUri=<%= $webservice_uri %>
+ServerUri=<%= $webservice_uri %>
 <% } -%>
 SudoCommand=<%= $sudo_command %>
 SudoUser=<%= $sudo_user %>

@@ -1,10 +1,20 @@
-# Changelog
+# Change log
+
+All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
+
+## [0.9.4](https://github.com/broadinstitute/puppet-qualys_agent/tree/0.9.4) (2021-10-18)
+
+[Full Changelog](https://github.com/broadinstitute/puppet-qualys_agent/compare/0.9.3...0.9.4)
+
+### Added
+
+- Adds webservice\_uri to configuration [\#23](https://github.com/broadinstitute/puppet-qualys_agent/pull/23) ([ralfbosz](https://github.com/ralfbosz))
 
 ## [0.9.3](https://github.com/broadinstitute/puppet-qualys_agent/tree/0.9.3) (2020-11-03)
 
 [Full Changelog](https://github.com/broadinstitute/puppet-qualys_agent/compare/0.9.2...0.9.3)
 
-**Implemented enhancements:**
+### Added
 
 - Ability to configure qualys\_https\_proxy and https\_proxy. [\#19](https://github.com/broadinstitute/puppet-qualys_agent/pull/19) ([zschulte](https://github.com/zschulte))
 
@@ -12,26 +22,21 @@
 
 [Full Changelog](https://github.com/broadinstitute/puppet-qualys_agent/compare/0.9.1...0.9.2)
 
-**Implemented enhancements:**
+### Added
 
 - Allow permissions to be set differently on Qualys logs [\#12](https://github.com/broadinstitute/puppet-qualys_agent/pull/12) ([coreone](https://github.com/coreone))
 - Change metadata.json to allow stdlib version 6 [\#11](https://github.com/broadinstitute/puppet-qualys_agent/pull/11) ([mbarnesBHR](https://github.com/mbarnesBHR))
 
-**Merged pull requests:**
+### Fixed
 
 - Fix metadata.json to allow for auto-deploy [\#14](https://github.com/broadinstitute/puppet-qualys_agent/pull/14) ([coreone](https://github.com/coreone))
-- Update CHANGELOG.md, prepare for release [\#13](https://github.com/broadinstitute/puppet-qualys_agent/pull/13) ([coreone](https://github.com/coreone))
-- Convert to orb [\#10](https://github.com/broadinstitute/puppet-qualys_agent/pull/10) ([coreone](https://github.com/coreone))
 
 ## [0.9.1](https://github.com/broadinstitute/puppet-qualys_agent/tree/0.9.1) (2019-06-19)
 
 [Full Changelog](https://github.com/broadinstitute/puppet-qualys_agent/compare/0.9.0...0.9.1)
 
-**Merged pull requests:**
+### Fixed
 
-- Fix tag syntax in Changelog generation [\#9](https://github.com/broadinstitute/puppet-qualys_agent/pull/9) ([coreone](https://github.com/coreone))
-- Release v0.9.1 [\#8](https://github.com/broadinstitute/puppet-qualys_agent/pull/8) ([coreone](https://github.com/coreone))
-- Fix URL for CircleCI badge [\#7](https://github.com/broadinstitute/puppet-qualys_agent/pull/7) ([coreone](https://github.com/coreone))
 - Fix service so that it will restart on any config file changes [\#6](https://github.com/broadinstitute/puppet-qualys_agent/pull/6) ([coreone](https://github.com/coreone))
 - Minor cleanup from the first release [\#5](https://github.com/broadinstitute/puppet-qualys_agent/pull/5) ([coreone](https://github.com/coreone))
 
@@ -39,7 +44,7 @@
 
 [Full Changelog](https://github.com/broadinstitute/puppet-qualys_agent/compare/26e8779acdf2e053a51423da03a2c73a90c23309...0.9.0)
 
-**Implemented enhancements:**
+### Added
 
 - Unit tests in CircleCI [\#4](https://github.com/broadinstitute/puppet-qualys_agent/pull/4) ([coreone](https://github.com/coreone))
 - Updates to get close to release 1 [\#3](https://github.com/broadinstitute/puppet-qualys_agent/pull/3) ([coreone](https://github.com/coreone))
