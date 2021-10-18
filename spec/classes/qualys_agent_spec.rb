@@ -548,12 +548,12 @@ LogFileDir=/tmp/logs
 LogLevel=5
 ProcessPriority=5
 RequestTimeOut=300
+ServiceUri=https://localhost/CloudAgent/
 SudoCommand=othersudo
 SudoUser=someuser
 UseAuditDispatcher=0
 UserGroup=
-UseSudo=1
-WebServiceUri=https://localhost/CloudAgent/}
+UseSudo=1}
 
           it do
             is_expected.to contain_file('/tmp/logs').with(
