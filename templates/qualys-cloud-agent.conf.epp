@@ -45,5 +45,5 @@ User=<%= $user %>
 UserGroup=<%= $user_group %>
 UseSudo=<%= $use_sudo %>
 <% if $webservice_uri { -%>
-ServerUri=<%= $webservice_uri %>
+WebServiceUri=<%= $webservice_uri %>
 <% } -%>
