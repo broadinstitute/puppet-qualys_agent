@@ -1,13 +1,18 @@
 ---
 appveyor.yml:
   delete: true
+.devcontainer/devcontainer.json:
+  unmanaged: true
 .gitignore:
   required:
     - '/.librarian'
     - '/.tmp'
     - '/spec/fixtures/work-dir'
+    - 'rspec.xml'
 .gitlab-ci.yml:
   delete: true
+.rspec:
+  unmanaged: true
 Rakefile:
   changelog_project: 'puppet-qualys_agent'
   changelog_user: 'broadinstitute'
@@ -22,9 +27,8 @@ Gemfile:
   optional:
     ':development':
       - gem: 'github_changelog_generator'
-        git: 'https://github.com/skywinder/github-changelog-generator'
-        ref: '20ee04ba1234e9e83eb2ffb5056e23d641c7a018'
-        condition: "Gem::Version.new(RUBY_VERSION.dup) >= Gem::Version.new('2.2.2')"
+        version: '~> 1.15'
+        condition: "Gem::Version.new(RUBY_VERSION.dup) >= Gem::Version.new('2.3.0')"
 .travis.yml:
   delete: true
 .yardopts:
@@ -32,5 +36,6 @@ Gemfile:
 spec/default_facts.yml:
   delete: true
 spec/spec_helper.rb:
+  coverage_report: true
   hiera_config: 'spec/fixtures/hiera.yaml'
   mock_with: ':rspec'
