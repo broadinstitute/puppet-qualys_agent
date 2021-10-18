@@ -36,6 +36,9 @@ LogFileDir=<%= $log_file_dir %>
 LogLevel=<%= $log_level %>
 ProcessPriority=<%= $process_priority %>
 RequestTimeOut=<%= $request_timeout %>
+<% if $webservice_uri { -%>
+ServiceUri=<%= $webservice_uri %>
+<% } -%>
 SudoCommand=<%= $sudo_command %>
 SudoUser=<%= $sudo_user %>
 UseAuditDispatcher=<%= $use_audit_dispatcher %>
@@ -44,6 +47,3 @@ User=<%= $user %>
 <% } -%>
 UserGroup=<%= $user_group %>
 UseSudo=<%= $use_sudo %>
-<% if $webservice_uri { -%>
-ServiceUri=<%= $webservice_uri %>
-<% } -%>
