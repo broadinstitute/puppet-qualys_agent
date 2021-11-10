@@ -11,8 +11,6 @@ appveyor.yml:
     - 'rspec.xml'
 .gitlab-ci.yml:
   delete: true
-.rspec:
-  unmanaged: true
 Rakefile:
   changelog_project: 'puppet-qualys_agent'
   changelog_user: 'broadinstitute'
@@ -39,3 +37,5 @@ spec/spec_helper.rb:
   coverage_report: true
   hiera_config: 'spec/fixtures/hiera.yaml'
   mock_with: ':rspec'
+  spec_overrides:
+    - SimpleCov.formatter = SimpleCov::Formatter::Codecov
