@@ -1,8 +1,6 @@
 ---
 appveyor.yml:
   delete: true
-.devcontainer/devcontainer.json:
-  unmanaged: true
 .gitignore:
   required:
     - '/.librarian'
@@ -27,6 +25,10 @@ Gemfile:
       - gem: 'github_changelog_generator'
         version: '~> 1.15'
         condition: "Gem::Version.new(RUBY_VERSION.dup) >= Gem::Version.new('2.3.0')"
+      - gem: 'concurrent-ruby'
+        version: '< 1.2.0'
+      - gem: 'pdk'
+      - gem: 'puppet-lint-legacy_facts-check'
 .travis.yml:
   delete: true
 .yardopts:
@@ -37,5 +39,3 @@ spec/spec_helper.rb:
   coverage_report: true
   hiera_config: 'spec/fixtures/hiera.yaml'
   mock_with: ':rspec'
-  spec_overrides:
-    - SimpleCov.formatter = SimpleCov::Formatter::Codecov

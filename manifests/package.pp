@@ -4,12 +4,11 @@
 # Install or uninstall the Qualys agent package
 #
 class qualys_agent::package {
-
   if $qualys_agent::manage_package {
     # Force package remove if agent ensure is "absent"
     $ensure = $qualys_agent::ensure ? {
-      present => $qualys_agent::package_ensure,
-      absent  => 'absent',
+      'present' => $qualys_agent::package_ensure,
+      'absent'  => 'absent',
     }
 
     package { 'qualys_agent':
@@ -18,8 +17,8 @@ class qualys_agent::package {
     }
     # Do not create an ordering dependency if we are removing the agent
     $package_dep = $qualys_agent::ensure ? {
-      present => Package['qualys_agent'],
-      absent  => undef,
+      'present' => Package['qualys_agent'],
+      'absent'  => undef,
     }
   } else {
     $package_dep = undef

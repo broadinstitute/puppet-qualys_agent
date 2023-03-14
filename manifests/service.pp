@@ -4,16 +4,15 @@
 # Manage the system service that runs the Qualys agent
 #
 class qualys_agent::service {
-
   if $qualys_agent::manage_service {
     # Force service stopped and disabled if agent ensure is "absent"
     $ensure = $qualys_agent::ensure ? {
-      present => $qualys_agent::service_ensure,
-      absent  => 'stopped',
+      'present' => $qualys_agent::service_ensure,
+      'absent'  => 'stopped',
     }
     $enable = $qualys_agent::ensure ? {
-      present => $qualys_agent::service_enable,
-      absent  => false,
+      'present' => $qualys_agent::service_enable,
+      'absent'  => false,
     }
 
     service { 'qualys_agent':
@@ -31,8 +30,8 @@ class qualys_agent::service {
 
     # Do not create an ordering dependency if we are removing the agent
     $service_dep = $qualys_agent::ensure ? {
-      present => Service['qualys_agent'],
-      absent  => undef,
+      'present' => Service['qualys_agent'],
+      'absent'  => undef,
     }
   }
 }
