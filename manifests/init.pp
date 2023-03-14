@@ -155,7 +155,6 @@ class qualys_agent (
   Integer $use_sudo,
   Optional[String] $webservice_uri,
 ) {
-
   # Protect against an bad setting for filesystem paths
   if $qualys_agent::agent_user_homedir == '/' {
     fail('agent_user_homedir is set to /.  Installation cannot continue.')

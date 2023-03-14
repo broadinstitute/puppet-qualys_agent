@@ -16,40 +16,17 @@ jobs:
         uses: 'actions/checkout@v3'
 
       - name: 'Set up Ruby'
-        uses: 'ruby/setup-ruby@v1.134.0'
-        with:
-          ruby-version: '2.7'
-
-      - name: Get full Ruby version
-        id: full-ruby-version
-        run: |
-          ruby -e 'puts RUBY_VERSION' | awk '{print "ruby_version="$1}' >> $GITHUB_ENV
-
-      - name: 'Cache Ruby'
-        uses: 'actions/cache@v3'
-        with:
-          path: 'vendor/bundle'
-          key: ${{ runner.os }}-${{ env.ruby_version }}-v1-gems-${{ hashFiles('**/Gemfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-${{ env.ruby_version }}-v1-gems-
-
-      - name: 'Update RubyGems and install bundler'
+        uses: 'ruby/setup-ruby@v1.144.0'
         env:
-          PUPPET_GEM_VERSION: ${{ matrix.puppet }}
-        run: |
-          gem update --system
-          gem install bundler
-          gem --version
-          bundler --version
-
-      - name: 'Install ruby dependencies'
-        run: |
-          bundle config path vendor/bundle
-          bundle config set with 'development'
-          bundle install --jobs 4 --retry 3
+          BUNDLE_SILENCE_ROOT_WARNING: '1'
+          BUNDLE_WITH: 'development'
+        with:
+          bundler-cache: true
+          ruby-version: '2.7'
+          rubygems: 'latest'
 
       - name: 'Module build'
-        run: 'bundle exec rake module:build'
+        run: 'bundle exec pdk build --force'
 
       - name: 'Publish package to Puppet Forge'
         env:

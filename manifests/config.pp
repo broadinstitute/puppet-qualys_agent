@@ -5,7 +5,6 @@
 # `qagent_udc_log` subclasses to configure both log configuration files.
 #
 class qualys_agent::config {
-
   if $qualys_agent::log_dest_type == 'file' {
     $channel_name = 'c3'
   } else {
@@ -26,24 +25,26 @@ class qualys_agent::config {
 
   file { 'qualys_config':
     ensure    => $ensure,
-    content   => epp('qualys_agent/qualys-cloud-agent.conf.epp', {
-      activation_id        => $qualys_agent::activation_id,
-      cmd_max_timeout      => $qualys_agent::cmd_max_timeout,
-      cmd_stdout_size      => $qualys_agent::cmd_stdout_size,
-      customer_id          => $qualys_agent::customer_id,
-      hostid_search_dir    => $qualys_agent::hostid_search_dir,
-      log_file_dir         => $qualys_agent::log_file_dir,
-      log_level            => $qualys_agent::log_level,
-      process_priority     => $qualys_agent::process_priority,
-      request_timeout      => $qualys_agent::request_timeout,
-      sudo_command         => $qualys_agent::sudo_command,
-      sudo_user            => $qualys_agent::sudo_user,
-      use_audit_dispatcher => $qualys_agent::use_audit_dispatcher,
-      use_sudo             => $qualys_agent::use_sudo,
-      user                 => $qualys_agent::agent_user,
-      user_group           => $qualys_agent::agent_group,
-      webservice_uri       => $qualys_agent::webservice_uri,
-    }),
+    content   => epp('qualys_agent/qualys-cloud-agent.conf.epp',
+      {
+        activation_id        => $qualys_agent::activation_id,
+        cmd_max_timeout      => $qualys_agent::cmd_max_timeout,
+        cmd_stdout_size      => $qualys_agent::cmd_stdout_size,
+        customer_id          => $qualys_agent::customer_id,
+        hostid_search_dir    => $qualys_agent::hostid_search_dir,
+        log_file_dir         => $qualys_agent::log_file_dir,
+        log_level            => $qualys_agent::log_level,
+        process_priority     => $qualys_agent::process_priority,
+        request_timeout      => $qualys_agent::request_timeout,
+        sudo_command         => $qualys_agent::sudo_command,
+        sudo_user            => $qualys_agent::sudo_user,
+        use_audit_dispatcher => $qualys_agent::use_audit_dispatcher,
+        use_sudo             => $qualys_agent::use_sudo,
+        user                 => $qualys_agent::agent_user,
+        user_group           => $qualys_agent::agent_group,
+        webservice_uri       => $qualys_agent::webservice_uri,
+      }
+    ),
     group     => $qualys_agent::group,
     mode      => '0600',
     path      => "${qualys_agent::conf_dir}/qualys-cloud-agent.conf",
@@ -57,24 +58,26 @@ class qualys_agent::config {
   # *actual* config changes.
   file { 'qualys_properties':
     ensure    => $ensure,
-    content   => epp('qualys_agent/qualys-cloud-agent.conf.epp', {
-      activation_id        => $qualys_agent::activation_id,
-      cmd_max_timeout      => $qualys_agent::cmd_max_timeout,
-      cmd_stdout_size      => $qualys_agent::cmd_stdout_size,
-      customer_id          => $qualys_agent::customer_id,
-      hostid_search_dir    => $qualys_agent::hostid_search_dir,
-      log_file_dir         => $qualys_agent::log_file_dir,
-      log_level            => $qualys_agent::log_level,
-      process_priority     => $qualys_agent::process_priority,
-      request_timeout      => $qualys_agent::request_timeout,
-      sudo_command         => $qualys_agent::sudo_command,
-      sudo_user            => $qualys_agent::sudo_user,
-      use_audit_dispatcher => $qualys_agent::use_audit_dispatcher,
-      use_sudo             => $qualys_agent::use_sudo,
-      user                 => $qualys_agent::agent_user,
-      user_group           => $qualys_agent::agent_group,
-      webservice_uri       => $qualys_agent::webservice_uri,
-    }),
+    content   => epp('qualys_agent/qualys-cloud-agent.conf.epp',
+      {
+        activation_id        => $qualys_agent::activation_id,
+        cmd_max_timeout      => $qualys_agent::cmd_max_timeout,
+        cmd_stdout_size      => $qualys_agent::cmd_stdout_size,
+        customer_id          => $qualys_agent::customer_id,
+        hostid_search_dir    => $qualys_agent::hostid_search_dir,
+        log_file_dir         => $qualys_agent::log_file_dir,
+        log_level            => $qualys_agent::log_level,
+        process_priority     => $qualys_agent::process_priority,
+        request_timeout      => $qualys_agent::request_timeout,
+        sudo_command         => $qualys_agent::sudo_command,
+        sudo_user            => $qualys_agent::sudo_user,
+        use_audit_dispatcher => $qualys_agent::use_audit_dispatcher,
+        use_sudo             => $qualys_agent::use_sudo,
+        user                 => $qualys_agent::agent_user,
+        user_group           => $qualys_agent::agent_group,
+        webservice_uri       => $qualys_agent::webservice_uri,
+      }
+    ),
     group     => $qualys_agent::group,
     mode      => '0600',
     path      => "${qualys_agent::conf_dir}/qualys-cloud-agent.properties",
@@ -83,7 +86,7 @@ class qualys_agent::config {
     require   => $requires,
   }
 
-  file {  'qualys_hostid':
+  file { 'qualys_hostid':
     ensure  => $ensure,
     group   => $qualys_agent::group,
     mode    => '0660',
@@ -93,10 +96,12 @@ class qualys_agent::config {
   }
   file { 'qualys_env':
     ensure    => $ensure,
-    content   => epp('qualys_agent/qualys-cloud-agent.environment.epp', {
-      https_proxy        => $qualys_agent::https_proxy,
-      qualys_https_proxy => $qualys_agent::qualys_https_proxy,
-    }),
+    content   => epp('qualys_agent/qualys-cloud-agent.environment.epp',
+      {
+        https_proxy        => $qualys_agent::https_proxy,
+        qualys_https_proxy => $qualys_agent::qualys_https_proxy,
+      }
+    ),
     group     => $qualys_agent::group,
     mode      => '0600',
     path      => "${qualys_agent::env_dir}/qualys-cloud-agent",
