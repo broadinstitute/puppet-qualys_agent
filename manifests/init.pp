@@ -119,14 +119,14 @@
 #
 class qualys_agent (
   Enum['absent', 'present'] $ensure,
-  String $activation_id,
+  Variant[String[1], Sensitive[String[1]]] $activation_id,
   Optional[String] $agent_group,
   Optional[String] $agent_user,
   Stdlib::Absolutepath $agent_user_homedir,
   Integer $cmd_max_timeout,
   Integer $cmd_stdout_size,
   Stdlib::Absolutepath $conf_dir,
-  String $customer_id,
+  Variant[String[1], Sensitive[String[1]]] $customer_id,
   Stdlib::Absolutepath $env_dir,
   Stdlib::Absolutepath $hostid_path,
   Optional[Stdlib::Absolutepath] $hostid_search_dir,
