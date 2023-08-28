@@ -1,7 +1,7 @@
-<%- | String $activation_id,
+<%- | Variant[String[1], Sensitive[String[1]]] $activation_id,
       Integer $cmd_max_timeout,
       Integer $cmd_stdout_size,
-      String $customer_id,
+      Variant[String[1], Sensitive[String[1]]] $customer_id,
       Optional[String] $webservice_uri,
       Optional[Stdlib::Absolutepath] $hostid_search_dir,
       Stdlib::Absolutepath $log_file_dir,
@@ -25,10 +25,10 @@
 #RequestTimeOut: Http request timeout in seconds.
 #CmdStdOutSize: Command std output size in KB. Any command output size exceeds this time will be truncated.
 
-ActivationId=<%= $activation_id %>
+ActivationId=<%= unwrap($activation_id) %>
 CmdMaxTimeOut=<%= $cmd_max_timeout %>
 CmdStdOutSize=<%= $cmd_stdout_size %>
-CustomerId=<%= $customer_id %>
+CustomerId=<%= unwrap($customer_id) %>
 <% if $hostid_search_dir { -%>
 HostIdSearchDir=<%= $hostid_search_dir %>
 <% } -%>
