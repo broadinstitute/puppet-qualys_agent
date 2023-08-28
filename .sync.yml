@@ -28,7 +28,7 @@ Gemfile:
       - gem: 'concurrent-ruby'
         version: '< 1.2.0'
       - gem: 'pdk'
-      - gem: 'puppet-lint-legacy_facts-check'
+        version: '~> 3.0.0'
 .travis.yml:
   delete: true
 .yardopts:
