@@ -5,55 +5,11 @@ name: 'checks'
   pull_request:
     branches:
       - 'main'
-  push:
-    branches:
-      - 'main'
 
 jobs:
+  pre-commit:
+    uses: broadinstitute/shared-workflows/.github/workflows/pre-commit.yaml@v2.0.0
   static-analysis:
-    runs-on: 'ubuntu-latest'
-
-    steps:
-      - name: 'Checkout repo'
-        uses: 'actions/checkout@v4'
-
-      - name: 'Set up Ruby'
-        uses: 'ruby/setup-ruby@v1.153.0'
-        env:
-          BUNDLE_SILENCE_ROOT_WARNING: '1'
-          BUNDLE_WITH: 'development'
-        with:
-          bundler-cache: true
-          ruby-version: '3.2'
-          rubygems: 'latest'
-
-      - name: 'Run static analysis'
-        run: bundle exec pdk validate
-
+    uses: broadinstitute/shared-workflows/.github/workflows/puppet-lint.yaml@v2.0.0
   unit-tests:
-    runs-on: 'ubuntu-latest'
-
-    strategy:
-      matrix:
-        puppet:
-          - '< 7.0.0'
-          - '< 8.0.0'
-        ruby:
-          - '2.7'
-          - '3.2'
-    steps:
-      - name: 'Checkout repo'
-        uses: 'actions/checkout@v4'
-
-      - name: 'Set up Ruby'
-        uses: 'ruby/setup-ruby@v1.153.0'
-        env:
-          BUNDLE_SILENCE_ROOT_WARNING: '1'
-          BUNDLE_WITH: 'development'
-        with:
-          bundler-cache: true
-          ruby-version: ${{ matrix.ruby }}
-          rubygems: 'latest'
-
-      - name: 'Run unit tests'
-        run: 'bundle exec pdk test unit -v'
+    uses: broadinstitute/shared-workflows/.github/workflows/puppet-unit-test.yaml@v2.0.0
