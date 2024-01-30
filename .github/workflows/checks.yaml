@@ -13,3 +13,5 @@ jobs:
     uses: broadinstitute/shared-workflows/.github/workflows/puppet-lint.yaml@v2.0.1
   unit-tests:
     uses: broadinstitute/shared-workflows/.github/workflows/puppet-unit-test.yaml@tex_green
+    with:
+      ruby_versions: '{ "versions": [ "3.2" ] }'
