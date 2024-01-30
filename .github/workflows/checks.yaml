@@ -12,4 +12,4 @@ jobs:
   static-analysis:
     uses: broadinstitute/shared-workflows/.github/workflows/puppet-lint.yaml@v2.0.1
   unit-tests:
-    uses: broadinstitute/shared-workflows/.github/workflows/puppet-unit-test.yaml@v2.0.1
+    uses: broadinstitute/shared-workflows/.github/workflows/puppet-unit-test.yaml@tex_green
