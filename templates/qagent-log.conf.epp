@@ -35,7 +35,7 @@ logging.loggers.l3.level = information
 logging.loggers.l3.channel = splitter
 
 logging.formatters.f1.class = PatternFormatter
-logging.formatters.f1.pattern = %Y-%m-%d %H:%M:%S.%i [%s][%P]:[%p]:%t
+logging.formatters.f1.pattern = %Y-%m-%d %H:%M:%S.%i %Z [%s][%P]:[%p]:%t
 logging.formatters.f1.times = local
 
 logging.formatters.f2.class = PatternFormatter
