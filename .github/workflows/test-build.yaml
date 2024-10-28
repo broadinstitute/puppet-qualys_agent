@@ -8,6 +8,6 @@ name: 'test_build'
 
 jobs:
   test_build:
-    uses: broadinstitute/shared-workflows/.github/workflows/puppet-build.yaml@v2.2.0
+    uses: broadinstitute/shared-workflows/.github/workflows/puppet-build.yaml@v2.3.0
     with:
       puppet_package_name: broadinstitute-qualys_agent
