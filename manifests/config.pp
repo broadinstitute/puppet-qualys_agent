@@ -65,7 +65,7 @@ class qualys_agent::config {
   # For some reason, a .properties file needs to exist on first start, so create it here
   # and keep it present, but don't restart the service if it changes.  Just restart if the
   # *actual* config changes.
-  if $file_exists {
+  if ($file_exists) or ($qualys_agent::ensure == 'absent') {
     $prop_ensure = 'absent'
   } else {
     $prop_ensure = 'file'
