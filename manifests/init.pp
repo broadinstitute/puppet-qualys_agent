@@ -136,6 +136,7 @@ class qualys_agent (
   String $sudo_user,
   Integer $use_audit_dispatcher,
   Integer $use_sudo,
+  Stdlib::Absolutepath $log_file_dir,
   Enum['running', 'stopped'] $service_ensure,
   Optional[String] $webservice_uri,
   Optional[String] $agent_group,
@@ -155,7 +156,6 @@ class qualys_agent (
   Stdlib::Absolutepath $env_dir,
   Stdlib::Absolutepath $hostid_path,
   Enum['file', 'syslog'] $log_dest_type = 'file',
-  Stdlib::Absolutepath $log_file_dir,
 ) {
   # Protect against an bad setting for filesystem paths
   if $qualys_agent::agent_user_homedir == '/' {
