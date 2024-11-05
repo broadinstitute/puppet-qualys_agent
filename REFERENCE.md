@@ -7,12 +7,12 @@
 ### Classes
 
 * [`qualys_agent`](#qualys_agent): Manage an installation of the Qualys Cloud Agent
-* [`qualys_agent::config`](#qualys_agentconfig): Configure the Qualys agent
-* [`qualys_agent::config::qagent_log`](#qualys_agentconfigqagent_log): Manage the main qagent-log.conf configuration file
-* [`qualys_agent::config::qagent_udc_log`](#qualys_agentconfigqagent_udc_log): Manage the main qagent-udc-log.conf configuration file
-* [`qualys_agent::package`](#qualys_agentpackage): Manage the Qualys agent's package installation
-* [`qualys_agent::service`](#qualys_agentservice): Configure the Qualys agent service
-* [`qualys_agent::user`](#qualys_agentuser): Configure the user and group to run the Qualys agent service
+* [`qualys_agent::config`](#qualys_agent--config): Configure the Qualys agent
+* [`qualys_agent::config::qagent_log`](#qualys_agent--config--qagent_log): Manage the main qagent-log.conf configuration file
+* [`qualys_agent::config::qagent_udc_log`](#qualys_agent--config--qagent_udc_log): Manage the main qagent-udc-log.conf configuration file
+* [`qualys_agent::package`](#qualys_agent--package): Manage the Qualys agent's package installation
+* [`qualys_agent::service`](#qualys_agent--service): Configure the Qualys agent service
+* [`qualys_agent::user`](#qualys_agent--user): Configure the user and group to run the Qualys agent service
 
 ## Classes
 
@@ -35,282 +35,282 @@ class { 'qualys_agent':
 
 The following parameters are available in the `qualys_agent` class:
 
-* [`ensure`](#ensure)
-* [`activation_id`](#activation_id)
-* [`agent_group`](#agent_group)
-* [`agent_user`](#agent_user)
-* [`agent_user_homedir`](#agent_user_homedir)
-* [`cmd_max_timeout`](#cmd_max_timeout)
-* [`cmd_stdout_size`](#cmd_stdout_size)
-* [`conf_dir`](#conf_dir)
-* [`customer_id`](#customer_id)
-* [`env_dir`](#env_dir)
-* [`hostid_path`](#hostid_path)
-* [`hostid_search_dir`](#hostid_search_dir)
-* [`https_proxy`](#https_proxy)
-* [`log_dest_type`](#log_dest_type)
-* [`log_file_dir`](#log_file_dir)
-* [`log_group`](#log_group)
-* [`log_level`](#log_level)
-* [`log_mode`](#log_mode)
-* [`log_owner`](#log_owner)
-* [`manage_group`](#manage_group)
-* [`manage_package`](#manage_package)
-* [`manage_service`](#manage_service)
-* [`manage_user`](#manage_user)
-* [`package_ensure`](#package_ensure)
-* [`package_name`](#package_name)
-* [`process_priority`](#process_priority)
-* [`qualys_https_proxy`](#qualys_https_proxy)
-* [`request_timeout`](#request_timeout)
-* [`service_enable`](#service_enable)
-* [`service_ensure`](#service_ensure)
-* [`service_name`](#service_name)
-* [`sudo_command`](#sudo_command)
-* [`sudo_user`](#sudo_user)
-* [`use_audit_dispatcher`](#use_audit_dispatcher)
-* [`use_sudo`](#use_sudo)
-* [`webservice_uri`](#webservice_uri)
+* [`ensure`](#-qualys_agent--ensure)
+* [`activation_id`](#-qualys_agent--activation_id)
+* [`agent_group`](#-qualys_agent--agent_group)
+* [`agent_user`](#-qualys_agent--agent_user)
+* [`agent_user_homedir`](#-qualys_agent--agent_user_homedir)
+* [`cmd_max_timeout`](#-qualys_agent--cmd_max_timeout)
+* [`cmd_stdout_size`](#-qualys_agent--cmd_stdout_size)
+* [`conf_dir`](#-qualys_agent--conf_dir)
+* [`customer_id`](#-qualys_agent--customer_id)
+* [`env_dir`](#-qualys_agent--env_dir)
+* [`hostid_path`](#-qualys_agent--hostid_path)
+* [`hostid_search_dir`](#-qualys_agent--hostid_search_dir)
+* [`https_proxy`](#-qualys_agent--https_proxy)
+* [`log_dest_type`](#-qualys_agent--log_dest_type)
+* [`log_file_dir`](#-qualys_agent--log_file_dir)
+* [`log_group`](#-qualys_agent--log_group)
+* [`log_level`](#-qualys_agent--log_level)
+* [`log_mode`](#-qualys_agent--log_mode)
+* [`log_owner`](#-qualys_agent--log_owner)
+* [`manage_group`](#-qualys_agent--manage_group)
+* [`manage_package`](#-qualys_agent--manage_package)
+* [`manage_service`](#-qualys_agent--manage_service)
+* [`manage_user`](#-qualys_agent--manage_user)
+* [`package_ensure`](#-qualys_agent--package_ensure)
+* [`package_name`](#-qualys_agent--package_name)
+* [`process_priority`](#-qualys_agent--process_priority)
+* [`qualys_https_proxy`](#-qualys_agent--qualys_https_proxy)
+* [`request_timeout`](#-qualys_agent--request_timeout)
+* [`service_enable`](#-qualys_agent--service_enable)
+* [`service_ensure`](#-qualys_agent--service_ensure)
+* [`service_name`](#-qualys_agent--service_name)
+* [`sudo_command`](#-qualys_agent--sudo_command)
+* [`sudo_user`](#-qualys_agent--sudo_user)
+* [`use_audit_dispatcher`](#-qualys_agent--use_audit_dispatcher)
+* [`use_sudo`](#-qualys_agent--use_sudo)
+* [`webservice_uri`](#-qualys_agent--webservice_uri)
 
-##### <a name="ensure"></a>`ensure`
+##### <a name="-qualys_agent--ensure"></a>`ensure`
 
 Data type: `Enum['absent', 'present']`
 
 Ensure that the Qualys agent is present on the system, or absent.
 
-##### <a name="activation_id"></a>`activation_id`
+##### <a name="-qualys_agent--activation_id"></a>`activation_id`
 
-Data type: `String`
+Data type: `Variant[String[1], Sensitive[String[1]]]`
 
 The Activation ID you receive from Qualys for reporting back to their API (required)
 
-##### <a name="agent_group"></a>`agent_group`
+##### <a name="-qualys_agent--agent_group"></a>`agent_group`
 
 Data type: `Optional[String]`
 
 The group that should run the agent.  This also will be the UserGroup setting in the configuration file. (Default: `undef`)
 
-##### <a name="agent_user"></a>`agent_user`
+##### <a name="-qualys_agent--agent_user"></a>`agent_user`
 
 Data type: `Optional[String]`
 
 The user that should run the agent (Default: `undef`)
 
-##### <a name="agent_user_homedir"></a>`agent_user_homedir`
+##### <a name="-qualys_agent--agent_user_homedir"></a>`agent_user_homedir`
 
 Data type: `Stdlib::Absolutepath`
 
 The fully qualified path to the agent user's home directory (Default: `/usr/local/qualys`)
 
-##### <a name="cmd_max_timeout"></a>`cmd_max_timeout`
+##### <a name="-qualys_agent--cmd_max_timeout"></a>`cmd_max_timeout`
 
 Data type: `Integer`
 
 The CmdMaxTimeOut value in qualys-cloud-agent.conf (Default: `1800`)
 
-##### <a name="cmd_stdout_size"></a>`cmd_stdout_size`
+##### <a name="-qualys_agent--cmd_stdout_size"></a>`cmd_stdout_size`
 
 Data type: `Integer`
 
 The CmdStdOutSize value in qualys-cloud-agent.conf (Default: `1024`)
 
-##### <a name="conf_dir"></a>`conf_dir`
+##### <a name="-qualys_agent--conf_dir"></a>`conf_dir`
 
 Data type: `Stdlib::Absolutepath`
 
 The directory where the qualys-cloud-agent.conf file will exist (Default: `/etc/qualys/cloud-agent`)
 
-##### <a name="customer_id"></a>`customer_id`
+##### <a name="-qualys_agent--customer_id"></a>`customer_id`
 
-Data type: `String`
+Data type: `Variant[String[1], Sensitive[String[1]]]`
 
 The Customer ID you receive from Qualys for reporting back to their API (required)
 
-##### <a name="env_dir"></a>`env_dir`
+##### <a name="-qualys_agent--env_dir"></a>`env_dir`
 
 Data type: `Stdlib::Absolutepath`
 
 The directory in which to place the environment variable file qualys-cloud-agent.  (Default: `/etc/sysconfig`)
 
-##### <a name="hostid_path"></a>`hostid_path`
+##### <a name="-qualys_agent--hostid_path"></a>`hostid_path`
 
 Data type: `Stdlib::Absolutepath`
 
 The full filesystem path to the hostid file (Default: `/etc/qualys/hostid`)
 
-##### <a name="hostid_search_dir"></a>`hostid_search_dir`
+##### <a name="-qualys_agent--hostid_search_dir"></a>`hostid_search_dir`
 
 Data type: `Optional[Stdlib::Absolutepath]`
 
 The HostIdSearchDir value in qualys-cloud-agent.conf (Default: `undef`)
 
-##### <a name="https_proxy"></a>`https_proxy`
+##### <a name="-qualys_agent--https_proxy"></a>`https_proxy`
 
 Data type: `Optional[String]`
 
 The https proxy to be used for all commands performed by the Cloud Agent. (Default: `undef`)
 
-##### <a name="log_dest_type"></a>`log_dest_type`
+##### <a name="-qualys_agent--log_dest_type"></a>`log_dest_type`
 
 Data type: `Enum['file', 'syslog']`
 
 The log type (file or syslog) (Default: `file`)
 
-##### <a name="log_file_dir"></a>`log_file_dir`
+##### <a name="-qualys_agent--log_file_dir"></a>`log_file_dir`
 
 Data type: `Stdlib::Absolutepath`
 
 The LogFileDir value in qualys-cloud-agent.conf
 The directory in which the log files should be written (Default: `/var/log/qualys`)
 
-##### <a name="log_group"></a>`log_group`
+##### <a name="-qualys_agent--log_group"></a>`log_group`
 
 Data type: `Optional[String]`
 
 The group that should own files in the log directory (Default: `$agent_group`)
 
-##### <a name="log_level"></a>`log_level`
+##### <a name="-qualys_agent--log_level"></a>`log_level`
 
 Data type: `Integer`
 
 The LogLevel value in qualys-cloud-agent.conf (Default: `3`)
 
-##### <a name="log_mode"></a>`log_mode`
+##### <a name="-qualys_agent--log_mode"></a>`log_mode`
 
 Data type: `String`
 
 The file mode for log files in $log_file_dir (Default: `0600`)
 
-##### <a name="log_owner"></a>`log_owner`
+##### <a name="-qualys_agent--log_owner"></a>`log_owner`
 
 Data type: `Optional[String]`
 
 The user that should own files in the log directory (Default: `$agent_user`)
 
-##### <a name="manage_group"></a>`manage_group`
+##### <a name="-qualys_agent--manage_group"></a>`manage_group`
 
 Data type: `Boolean`
 
 Boolean to determine whether the group is managed by Puppet or not (Default: `true`)
 
-##### <a name="manage_package"></a>`manage_package`
+##### <a name="-qualys_agent--manage_package"></a>`manage_package`
 
 Data type: `Boolean`
 
 Boolean to determine whether the package is managed by Puppet or not (Default: `true`)
 
-##### <a name="manage_service"></a>`manage_service`
+##### <a name="-qualys_agent--manage_service"></a>`manage_service`
 
 Data type: `Boolean`
 
 Boolean to determine whether the service is managed by Puppet or not (Default: `true`)
 
-##### <a name="manage_user"></a>`manage_user`
+##### <a name="-qualys_agent--manage_user"></a>`manage_user`
 
 Data type: `Boolean`
 
 Boolean to determine whether the user is managed by Puppet or not (Default: `true`)
 
-##### <a name="package_ensure"></a>`package_ensure`
+##### <a name="-qualys_agent--package_ensure"></a>`package_ensure`
 
 Data type: `String`
 
 The "ensure" value for the Qualys agent package. This value can be "installed", "absent",
 or a version number if you want to specify a specific package version numer. (Default: `installed`)
 
-##### <a name="package_name"></a>`package_name`
+##### <a name="-qualys_agent--package_name"></a>`package_name`
 
 Data type: `String`
 
 The name of the package to install (Default: `qualys-cloud-agent`)
 
-##### <a name="process_priority"></a>`process_priority`
+##### <a name="-qualys_agent--process_priority"></a>`process_priority`
 
 Data type: `Integer`
 
 The ProcessPriority value in qualys-cloud-agent.conf (Default: `0`)
 
-##### <a name="qualys_https_proxy"></a>`qualys_https_proxy`
+##### <a name="-qualys_agent--qualys_https_proxy"></a>`qualys_https_proxy`
 
 Data type: `Optional[String]`
 
 The https proxy to be used by the Cloud Agent to communicate with qualys cloud platform. (Default: `undef`)
 
-##### <a name="request_timeout"></a>`request_timeout`
+##### <a name="-qualys_agent--request_timeout"></a>`request_timeout`
 
 Data type: `Integer`
 
 The RequestTimeOut value in qualys-cloud-agent.conf (Default: `600`)
 
-##### <a name="service_enable"></a>`service_enable`
+##### <a name="-qualys_agent--service_enable"></a>`service_enable`
 
 Data type: `Boolean`
 
 Boolean to determine whether the service is enabled or not (Default: `true`)
 
-##### <a name="service_ensure"></a>`service_ensure`
+##### <a name="-qualys_agent--service_ensure"></a>`service_ensure`
 
 Data type: `Enum['running', 'stopped']`
 
 Ensure that the Qualys agent is running on the system, or stopped (Default: `running`)
 
-##### <a name="service_name"></a>`service_name`
+##### <a name="-qualys_agent--service_name"></a>`service_name`
 
 Data type: `String`
 
 The name of the Qualys agent service (Default: `qualys-cloud-agent`)
 
-##### <a name="sudo_command"></a>`sudo_command`
+##### <a name="-qualys_agent--sudo_command"></a>`sudo_command`
 
 Data type: `String`
 
 The SudoCommand value in qualys-cloud-agent.conf (Default: `sudo`)
 
-##### <a name="sudo_user"></a>`sudo_user`
+##### <a name="-qualys_agent--sudo_user"></a>`sudo_user`
 
 Data type: `String`
 
 The SudoUser value in qualys-cloud-agent.conf (Default: `undef`)
 
-##### <a name="use_audit_dispatcher"></a>`use_audit_dispatcher`
+##### <a name="-qualys_agent--use_audit_dispatcher"></a>`use_audit_dispatcher`
 
 Data type: `Integer`
 
 The UseAuditDispatcher value in qualys-cloud-agent.conf (Default: `1`)
 
-##### <a name="use_sudo"></a>`use_sudo`
+##### <a name="-qualys_agent--use_sudo"></a>`use_sudo`
 
 Data type: `Integer`
 
 The UseSudo value in qualys-cloud-agent.conf (Default: `0`)
 
-##### <a name="webservice_uri"></a>`webservice_uri`
+##### <a name="-qualys_agent--webservice_uri"></a>`webservice_uri`
 
 Data type: `Optional[String]`
 
 The ServerUri value in qualys-cloud-agent.conf (Default: `undef`)
 
-### <a name="qualys_agentconfig"></a>`qualys_agent::config`
+### <a name="qualys_agent--config"></a>`qualys_agent::config`
 
 Manage the main qualys-cloud-agent.conf configuration file.  This class also includes the `qagent_log` and
 `qagent_udc_log` subclasses to configure both log configuration files.
 
-### <a name="qualys_agentconfigqagent_log"></a>`qualys_agent::config::qagent_log`
+### <a name="qualys_agent--config--qagent_log"></a>`qualys_agent::config::qagent_log`
 
 Manage the main qagent-log.conf configuration file
 
-### <a name="qualys_agentconfigqagent_udc_log"></a>`qualys_agent::config::qagent_udc_log`
+### <a name="qualys_agent--config--qagent_udc_log"></a>`qualys_agent::config::qagent_udc_log`
 
 Manage the main qagent-udc-log.conf configuration file
 
-### <a name="qualys_agentpackage"></a>`qualys_agent::package`
+### <a name="qualys_agent--package"></a>`qualys_agent::package`
 
 Install or uninstall the Qualys agent package
 
-### <a name="qualys_agentservice"></a>`qualys_agent::service`
+### <a name="qualys_agent--service"></a>`qualys_agent::service`
 
 Manage the system service that runs the Qualys agent
 
-### <a name="qualys_agentuser"></a>`qualys_agent::user`
+### <a name="qualys_agent--user"></a>`qualys_agent::user`
 
 Manage the system user and group that run the Qualys agent
