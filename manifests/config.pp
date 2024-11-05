@@ -55,9 +55,10 @@ class qualys_agent::config {
 
 # Test if qualys_agent has run before if yes do not lay down properties file
   exec { 'first_run':
-    command => 'systemctl is-active --quiet qualys-cloud-agent.service && touch /root/.qualys_agent_first_run || rm -f /root/.qualys_agent_first_run',
+    command => 'systemctl is-active --quiet qualys-cloud-agent.service && \
+                touch /root/.qualys_agent_first_run || rm -f /root/.qualys_agent_first_run',
     path    => '/bin:/usr/bin:/sbin:/usr/sbin',
-    unless  => 'test -e .qualys_agent_first_run',
+    unless  => 'test -e /root/.qualys_agent_first_run',
   }
   # See if that file is there indicating the first run has happened
   $file_exists = find_file('/root/.qualys_agent_first_run')
