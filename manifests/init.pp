@@ -10,6 +10,8 @@
 # @param ensure
 #   Ensure that the Qualys agent is present on the system, or absent.
 #
+
+#
 # @param activation_id
 #   The Activation ID you receive from Qualys for reporting back to their API (required)
 #
@@ -131,7 +133,7 @@ class qualys_agent (
   Stdlib::Absolutepath $hostid_path,
   Optional[Stdlib::Absolutepath] $hostid_search_dir,
   Optional[String] $https_proxy,
-  Enum['file', 'syslog'] $log_dest_type,
+  Enum['file', 'syslog'] $log_dest_type = 'file',
   Stdlib::Absolutepath $log_file_dir,
   Optional[String] $log_group,
   Integer $log_level,
