@@ -233,8 +233,8 @@ UseSudo=0}
                 owner: 'root',
                 require: ['Package[qualys_agent]'],
               )
-              .with_content(%r{logging.channels.c3.path = /var/log/qualys/qualys-cloud-agent.log})
-              .with_content(%r{logging.loggers.l1.channel = c3})
+              .with_content(%r{logging.channels.c3.path: /var/log/qualys/qualys-cloud-agent.log})
+              .with_content(%r{logging.loggers.l1.channel: c3})
           end
           it do
             is_expected.to contain_file('qualys_udc_log_config')
@@ -246,8 +246,8 @@ UseSudo=0}
                 owner: 'root',
                 require: ['Package[qualys_agent]'],
               )
-              .with_content(%r{logging.channels.c3.path = /var/log/qualys/qualys-udc-scan.log})
-              .with_content(%r{logging.loggers.l1.channel = c3})
+              .with_content(%r{logging.channels.c3.path: /var/log/qualys/qualys-udc-scan.log})
+              .with_content(%r{logging.loggers.l1.channel: c3})
           end
 
           # Service
@@ -607,10 +607,10 @@ UseSudo=1}
           end
 
           it do
-            is_expected.to contain_file('qualys_log_config').with(content: %r{logging.loggers.l1.channel = c2})
+            is_expected.to contain_file('qualys_log_config').with(content: %r{logging.loggers.l1.channel: c2})
           end
           it do
-            is_expected.to contain_file('qualys_udc_log_config').with(content: %r{logging.loggers.l1.channel = c2})
+            is_expected.to contain_file('qualys_udc_log_config').with(content: %r{logging.loggers.l1.channel: c2})
           end
         end
 
