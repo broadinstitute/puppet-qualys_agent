@@ -1,46 +1,34 @@
 <%- | String $channel_name,
       Stdlib::Absolutepath $log_path,
 | -%>
-# THIS FILE IS AUTOMATICALLY DISTRIBUTED BY PUPPET.
-# ANY CHANGES WILL BE OVERWRITTEN.
-
 logging.channels.c1.class = ConsoleChannel
 logging.channels.c1.formatter = f1
-
 logging.channels.c2.class = SyslogChannel
 logging.channels.c2.formatter = f2
 logging.channels.c2.name= qualys-cloud-agent
 logging.channels.c2.facility=24
 logging.channels.c2.options= 1
-
 logging.channels.c3.class = FileChannel
 logging.channels.c3.path = <%= $log_path %>
 logging.channels.c3.rotation = 10M
 logging.channels.c3.purgeCount = 5
 logging.channels.c3.archive = number
 logging.channels.c3.formatter = f1
-
 logging.loggers.root.channel = c3
 logging.loggers.root.level = information
-
 logging.loggers.l1.name = qualys-cloud-agent
 logging.loggers.l1.channel = <%= $channel_name %>
 logging.loggers.l1.level = information
-
 logging.loggers.l2.name = qualys-cloud-agent.provision
 logging.loggers.l2.level = debug
-
 logging.loggers.l3.name = qualys-cloud-agent.uninstall
 logging.loggers.l3.level = information
 logging.loggers.l3.channel = splitter
-
 logging.formatters.f1.class = PatternFormatter
 logging.formatters.f1.pattern = %Y-%m-%d %H:%M:%S.%i %Z [%s][%P]:[%p]:%t
 logging.formatters.f1.times = local
-
 logging.formatters.f2.class = PatternFormatter
 logging.formatters.f2.pattern = [%P]:[%p]:%t
 logging.formatters.f2.times = local
-
 logging.channels.splitter.class = SplitterChannel
 logging.channels.splitter.channels = c2,c3
