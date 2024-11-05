@@ -1,4 +1,3 @@
-#
 # @summary Manage an installation of the Qualys Cloud Agent
 #
 # @example
