@@ -18,7 +18,7 @@ logging.channels.c3.rotation: 10M
 logging.channels.splitter.channels: c2,c3
 logging.channels.splitter.class: SplitterChannel
 logging.formatters.f1.class: PatternFormatter
-logging.formatters.f1.pattern: %Y-%m-%d %H:%M:%S.%i %Z [%s][%P]:[%p]:%t
+logging.formatters.f1.pattern: %Y-%m-%d %H:%M:%S.%i [%s][%P]:[%p]:%t
 logging.formatters.f1.times: local
 logging.formatters.f2.class: PatternFormatter
 logging.formatters.f2.pattern: [%P]:[%p]:%t
