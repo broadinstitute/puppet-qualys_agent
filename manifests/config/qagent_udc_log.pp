@@ -4,7 +4,7 @@
 class qualys_agent::config::qagent_udc_log {
   file { 'qualys_udc_log_config':
     ensure  => $qualys_agent::config::ensure,
-    content => epp('qualys_agent/qagent-log.conf.epp',
+    content => epp('qualys_agent/qagent-udc-log.conf.epp',
       {
         channel_name => $qualys_agent::config::channel_name,
         log_path     => "${qualys_agent::log_file_dir}/qualys-udc-scan.log",
