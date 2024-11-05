@@ -52,26 +52,11 @@ class qualys_agent::config {
     show_diff => true,
     require   => $requires,
   }
-
-# Test if qualys_agent has run before if yes do not lay down properties file
-  exec { 'first_run':
-    command => 'systemctl is-active --quiet qualys-cloud-agent.service && \
-                touch /root/.qualys_agent_first_run || rm -f /root/.qualys_agent_first_run',
-    path    => '/bin:/usr/bin:/sbin:/usr/sbin',
-    unless  => 'test -e /root/.qualys_agent_first_run',
-  }
-  # See if that file is there indicating the first run has happened
-  $file_exists = find_file('/root/.qualys_agent_first_run')
   # For some reason, a .properties file needs to exist on first start, so create it here
   # and keep it present, but don't restart the service if it changes.  Just restart if the
   # *actual* config changes.
-  if ($file_exists == 'true') or ($qualys_agent::ensure == 'absent') {
-    $prop_ensure = 'absent'
-  } else {
-    $prop_ensure = 'file'
-  }
   file { 'qualys_properties':
-    ensure    => $prop_ensure,
+    ensure    => $ensure,
     content   => epp('qualys_agent/qualys-cloud-agent.conf.epp',
       {
         activation_id        => $qualys_agent::activation_id,

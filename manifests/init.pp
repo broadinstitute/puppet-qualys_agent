@@ -10,8 +10,6 @@
 # @param ensure
 #   Ensure that the Qualys agent is present on the system, or absent.
 #
-
-#
 # @param activation_id
 #   The Activation ID you receive from Qualys for reporting back to their API (required)
 #
