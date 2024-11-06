@@ -1,6 +1,6 @@
 {
   "name": "broadinstitute-qualys_agent",
-  "version": "0.9.4",
+  "version": "0.10.0",
   "author": "broadinstitute",
   "summary": "Install and configure the Qualys Cloud Agent",
   "license": "BSD-3-Clause",
@@ -17,7 +17,6 @@
     {
       "operatingsystem": "CentOS",
       "operatingsystemrelease": [
-        "7",
         "8",
         "9"
       ]
@@ -25,7 +24,6 @@
     {
       "operatingsystem": "OracleLinux",
       "operatingsystemrelease": [
-        "7",
         "8",
         "9"
       ]
@@ -33,7 +31,6 @@
     {
       "operatingsystem": "RedHat",
       "operatingsystemrelease": [
-        "7",
         "8",
         "9"
       ]
