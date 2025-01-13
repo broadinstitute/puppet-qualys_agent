@@ -7,6 +7,6 @@ name: 'deploy'
       - '[0-9]+.[0-9]+.[0-9]+'
 jobs:
   deploy:
-    uses: broadinstitute/shared-workflows/.github/workflows/puppet-forge-deploy.yaml@v2.5.0
+    uses: broadinstitute/shared-workflows/.github/workflows/puppet-forge-deploy.yaml@v2.6.1
     secrets:
       forge_token: ${{ secrets.BLACKSMITH_FORGE_API_KEY }}
