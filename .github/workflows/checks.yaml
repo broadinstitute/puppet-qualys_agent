@@ -8,8 +8,8 @@ name: 'checks'
 
 jobs:
   pre-commit:
-    uses: broadinstitute/shared-workflows/.github/workflows/pre-commit.yaml@v2.7.0
+    uses: broadinstitute/shared-workflows/.github/workflows/pre-commit.yaml@v2.7.1
   static-analysis:
-    uses: broadinstitute/shared-workflows/.github/workflows/puppet-lint.yaml@v2.7.0
+    uses: broadinstitute/shared-workflows/.github/workflows/puppet-lint.yaml@v2.7.1
   unit-tests:
-    uses: broadinstitute/shared-workflows/.github/workflows/puppet-unit-test.yaml@v2.7.0
+    uses: broadinstitute/shared-workflows/.github/workflows/puppet-unit-test.yaml@v2.7.1
