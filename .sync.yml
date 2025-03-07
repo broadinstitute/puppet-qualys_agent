@@ -24,7 +24,6 @@ Gemfile:
     ':development':
       - gem: 'github_changelog_generator'
       - gem: 'pdk'
-        version: '~> 3.0.0'
 .travis.yml:
   delete: true
 .yardopts:
