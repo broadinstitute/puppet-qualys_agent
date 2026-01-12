@@ -2,17 +2,18 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
+  annotations:
+    backstage.io/techdocs-ref: dir:.
+    github.com/project-slug: broadinstitute/puppet-qualys_agent
+  description:
+    Puppet module for installing and configuring the Qualys Cloud Agent
   name: puppet-qualys_agent
-  description: "Puppet module for installing and configuring the Qualys Cloud Agent"
   tags:
     - bits
     - bits-tools
     - puppet
     - qualys
   title: puppet-qualys_agent
-  annotations:
-    github.com/project-slug: broadinstitute/puppet-qualys_agent
-    backstage.io/techdocs-ref: dir:.
 spec:
   lifecycle: production
   owner: bits-aviso

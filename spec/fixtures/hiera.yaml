@@ -1,8 +1,8 @@
 ---
 :backends:
-  - 'yaml'
+  - yaml
 :hierarchy:
-  - 'environments/%{::environment}'
-  - 'test'
+  - "environments/%{::environment}"
+  - test
 :yaml:
-  :datadir: 'spec/fixtures/hieradata'
+  :datadir: spec/fixtures/hieradata

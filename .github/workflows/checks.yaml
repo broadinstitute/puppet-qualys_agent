@@ -1,15 +1,18 @@
 ---
-name: 'checks'
+name: checks
 
-'on':
+"on":
   pull_request:
     branches:
-      - 'main'
+      - main
+permissions:
+  contents: read
+  pull-requests: read
 
 jobs:
   pre-commit:
-    uses: broadinstitute/shared-workflows/.github/workflows/pre-commit.yaml@v5.0.1
+    uses: broadinstitute/shared-workflows/.github/workflows/pre-commit.yaml@v6.0.0
   static-analysis:
-    uses: broadinstitute/shared-workflows/.github/workflows/puppet-lint.yaml@v5.0.1
+    uses: broadinstitute/shared-workflows/.github/workflows/puppet-lint.yaml@v6.0.0
   unit-tests:
-    uses: broadinstitute/shared-workflows/.github/workflows/puppet-unit-test.yaml@v5.0.1
+    uses: broadinstitute/shared-workflows/.github/workflows/puppet-unit-test.yaml@v6.0.0

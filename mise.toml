@@ -1,0 +1,18 @@
+[tasks."bundle:config"]
+description = "Configure bundle to install locally"
+run = "bundle config set --local path '.bundle'"
+
+[tasks."bundle:install"]
+depends = ["bundle:config"]
+description = "Run a Bundle install"
+run = "bundle install"
+
+[tasks.strings]
+depends = ["bundle:config", "bundle:install"]
+description = "Run a Puppet Strings generation"
+run = "bundle exec puppet strings generate --format markdown; prettier -w REFERENCE.md"
+
+[tools]
+"npm:prettier" = "latest"
+node = "latest"
+# ruby = "3.3.10"

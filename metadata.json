@@ -38,17 +38,14 @@
     {
       "operatingsystem": "Debian",
       "operatingsystemrelease": [
-        "8",
-        "9",
-        "10",
         "11",
-        "12"
+        "12",
+        "13"
       ]
     },
     {
       "operatingsystem": "Ubuntu",
       "operatingsystemrelease": [
-        "18.04",
         "20.04",
         "22.04",
         "24.04"
@@ -62,6 +59,6 @@
     }
   ],
   "pdk-version": "3.4.0",
-  "template-url": "https://github.com/puppetlabs/pdk-templates#3.4.0.3",
-  "template-ref": "tags/3.4.0.3-0-g8fb22fc"
+  "template-url": "https://github.com/puppetlabs/pdk-templates#3.6.1",
+  "template-ref": "tags/3.6.1-0-gb9426e5"
 }
