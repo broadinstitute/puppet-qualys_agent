@@ -2,6 +2,6 @@
 fixtures:
   forge_modules:
     stdlib:
-      repo: 'puppetlabs/stdlib'
+      repo: puppetlabs/stdlib
   symlinks:
     qualys_agent: "#{source_dir}"

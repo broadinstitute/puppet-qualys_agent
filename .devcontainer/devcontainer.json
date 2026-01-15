@@ -10,8 +10,5 @@
     }
   },
 
-  "extensions": [
-    "puppet.puppet-vscode",
-    "rebornix.Ruby"
-  ]
+  "extensions": ["puppet.puppet-vscode", "rebornix.Ruby"]
 }

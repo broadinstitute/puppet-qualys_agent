@@ -1,0 +1,8 @@
+---
+site_name: Puppet Qualys Agent Module
+
+nav:
+  - Home: README.md
+
+plugins:
+  - techdocs-core

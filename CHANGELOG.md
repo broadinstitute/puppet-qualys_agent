@@ -6,19 +6,31 @@
 
 **Implemented enhancements:**
 
-- fix: Log config template format and ordering [\#115](https://github.com/broadinstitute/puppet-qualys_agent/pull/115) ([coreone](https://github.com/coreone))
-- Allow Sensitive value type, disallow empty ID's [\#90](https://github.com/broadinstitute/puppet-qualys_agent/pull/90) ([genebean](https://github.com/genebean))
-- Deprecate OSes, config update [\#25](https://github.com/broadinstitute/puppet-qualys_agent/pull/25) ([coreone](https://github.com/coreone))
-- Adds webservice\_uri to configuration [\#23](https://github.com/broadinstitute/puppet-qualys_agent/pull/23) ([ralfbosz](https://github.com/ralfbosz))
+- fix: Log config template format and ordering
+  [\#115](https://github.com/broadinstitute/puppet-qualys_agent/pull/115)
+  ([coreone](https://github.com/coreone))
+- Allow Sensitive value type, disallow empty ID's
+  [\#90](https://github.com/broadinstitute/puppet-qualys_agent/pull/90)
+  ([genebean](https://github.com/genebean))
+- Deprecate OSes, config update
+  [\#25](https://github.com/broadinstitute/puppet-qualys_agent/pull/25)
+  ([coreone](https://github.com/coreone))
+- Adds webservice_uri to configuration
+  [\#23](https://github.com/broadinstitute/puppet-qualys_agent/pull/23)
+  ([ralfbosz](https://github.com/ralfbosz))
 
 **Closed issues:**
 
-- deploy qualys on win machines [\#18](https://github.com/broadinstitute/puppet-qualys_agent/issues/18)
-- Add support for download package [\#16](https://github.com/broadinstitute/puppet-qualys_agent/issues/16)
+- deploy qualys on win machines
+  [\#18](https://github.com/broadinstitute/puppet-qualys_agent/issues/18)
+- Add support for download package
+  [\#16](https://github.com/broadinstitute/puppet-qualys_agent/issues/16)
 
 **Merged pull requests:**
 
-- fix: the default log format has been updated [\#108](https://github.com/broadinstitute/puppet-qualys_agent/pull/108) ([coreone](https://github.com/coreone))
+- fix: the default log format has been updated
+  [\#108](https://github.com/broadinstitute/puppet-qualys_agent/pull/108)
+  ([coreone](https://github.com/coreone))
 
 ## [0.9.3](https://github.com/broadinstitute/puppet-qualys_agent/tree/0.9.3) (2020-11-03)
 
@@ -26,7 +38,9 @@
 
 **Implemented enhancements:**
 
-- Ability to configure qualys\_https\_proxy and https\_proxy. [\#19](https://github.com/broadinstitute/puppet-qualys_agent/pull/19) ([zschulte](https://github.com/zschulte))
+- Ability to configure qualys_https_proxy and https_proxy.
+  [\#19](https://github.com/broadinstitute/puppet-qualys_agent/pull/19)
+  ([zschulte](https://github.com/zschulte))
 
 ## [0.9.2](https://github.com/broadinstitute/puppet-qualys_agent/tree/0.9.2) (2020-04-22)
 
@@ -34,12 +48,18 @@
 
 **Implemented enhancements:**
 
-- Allow permissions to be set differently on Qualys logs [\#12](https://github.com/broadinstitute/puppet-qualys_agent/pull/12) ([coreone](https://github.com/coreone))
-- Change metadata.json to allow stdlib version 6 [\#11](https://github.com/broadinstitute/puppet-qualys_agent/pull/11) ([mbarnesBHR](https://github.com/mbarnesBHR))
+- Allow permissions to be set differently on Qualys logs
+  [\#12](https://github.com/broadinstitute/puppet-qualys_agent/pull/12)
+  ([coreone](https://github.com/coreone))
+- Change metadata.json to allow stdlib version 6
+  [\#11](https://github.com/broadinstitute/puppet-qualys_agent/pull/11)
+  ([mbarnesBHR](https://github.com/mbarnesBHR))
 
 **Merged pull requests:**
 
-- Fix metadata.json to allow for auto-deploy [\#14](https://github.com/broadinstitute/puppet-qualys_agent/pull/14) ([coreone](https://github.com/coreone))
+- Fix metadata.json to allow for auto-deploy
+  [\#14](https://github.com/broadinstitute/puppet-qualys_agent/pull/14)
+  ([coreone](https://github.com/coreone))
 
 ## [0.9.1](https://github.com/broadinstitute/puppet-qualys_agent/tree/0.9.1) (2019-06-19)
 
@@ -47,8 +67,12 @@
 
 **Merged pull requests:**
 
-- Fix service so that it will restart on any config file changes [\#6](https://github.com/broadinstitute/puppet-qualys_agent/pull/6) ([coreone](https://github.com/coreone))
-- Minor cleanup from the first release [\#5](https://github.com/broadinstitute/puppet-qualys_agent/pull/5) ([coreone](https://github.com/coreone))
+- Fix service so that it will restart on any config file changes
+  [\#6](https://github.com/broadinstitute/puppet-qualys_agent/pull/6)
+  ([coreone](https://github.com/coreone))
+- Minor cleanup from the first release
+  [\#5](https://github.com/broadinstitute/puppet-qualys_agent/pull/5)
+  ([coreone](https://github.com/coreone))
 
 ## [0.9.0](https://github.com/broadinstitute/puppet-qualys_agent/tree/0.9.0) (2019-06-17)
 
@@ -56,10 +80,15 @@
 
 **Implemented enhancements:**
 
-- Unit tests in CircleCI [\#4](https://github.com/broadinstitute/puppet-qualys_agent/pull/4) ([coreone](https://github.com/coreone))
-- Updates to get close to release 1 [\#3](https://github.com/broadinstitute/puppet-qualys_agent/pull/3) ([coreone](https://github.com/coreone))
-- Vagrant, dependencies, config updates [\#1](https://github.com/broadinstitute/puppet-qualys_agent/pull/1) ([coreone](https://github.com/coreone))
+- Unit tests in CircleCI
+  [\#4](https://github.com/broadinstitute/puppet-qualys_agent/pull/4)
+  ([coreone](https://github.com/coreone))
+- Updates to get close to release 1
+  [\#3](https://github.com/broadinstitute/puppet-qualys_agent/pull/3)
+  ([coreone](https://github.com/coreone))
+- Vagrant, dependencies, config updates
+  [\#1](https://github.com/broadinstitute/puppet-qualys_agent/pull/1)
+  ([coreone](https://github.com/coreone))
 
-
-
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
+\* _This Changelog was automatically generated by
+[github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)_

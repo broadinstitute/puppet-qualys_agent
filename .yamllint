@@ -1,9 +1,12 @@
 ---
 extends: default
 ignore: |
-  spec/
+  .bundle
   .rubocop.yml
+  .tmp
+  spec/
 rules:
+  comments: disable
   indentation:
     spaces: 2
   line-length:

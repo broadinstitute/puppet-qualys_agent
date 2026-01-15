@@ -10,20 +10,22 @@ indent_style = space
 insert_final_newline = true
 trim_trailing_whitespace = true
 
+[*.md]
+indent_size = 2
+indent_style = space
+
 [LICENSE.txt]
 insert_final_newline = false
 
 [*.{diff,patch}]
 trim_trailing_whitespace = false
 
-[*.{json,yaml,yml}]
+[*.{json,prettierrc,yml,yaml,yamllint}]
 indent_size = 2
 indent_style = space
 
 [*.pp]
 indent_size = 2
-indent_style = space
 
 [*.rb]
 indent_size = 2
-indent_style = space

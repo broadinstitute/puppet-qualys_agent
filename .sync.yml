@@ -3,27 +3,26 @@ appveyor.yml:
   delete: true
 .gitignore:
   required:
-    - '/.librarian'
-    - '/.tmp'
-    - '/spec/fixtures/work-dir'
-    - 'rspec.xml'
+    - "/.librarian"
+    - "/.tmp"
+    - "/spec/fixtures/work-dir"
+    - "rspec.xml"
 .gitlab-ci.yml:
   delete: true
 Rakefile:
-  changelog_project: 'puppet-qualys_agent'
-  changelog_user: 'broadinstitute'
-  changelog_version_tag_pattern: '%s'
+  changelog_project: "puppet-qualys_agent"
+  changelog_user: "broadinstitute"
+  changelog_version_tag_pattern: "%s"
   extra_disabled_lint_checks:
-    - '80chars'
-    - 'autoloader_layout'
-    - 'puppet_url_without_modules'
+    - "80chars"
+    - "autoloader_layout"
+    - "puppet_url_without_modules"
   requires:
-    - 'puppet-lint/tasks/puppet-lint'
+    - "puppet-lint/tasks/puppet-lint"
 Gemfile:
   optional:
-    ':development':
-      - gem: 'github_changelog_generator'
-      - gem: 'pdk'
+    ":development":
+      - gem: "github_changelog_generator"
 .travis.yml:
   delete: true
 .yardopts:
@@ -32,5 +31,5 @@ spec/default_facts.yml:
   delete: true
 spec/spec_helper.rb:
   coverage_report: true
-  hiera_config: 'spec/fixtures/hiera.yaml'
-  mock_with: ':rspec'
+  hiera_config: "spec/fixtures/hiera.yaml"
+  mock_with: ":rspec"
