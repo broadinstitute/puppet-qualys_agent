@@ -10,8 +10,8 @@ permissions:
   pull-requests: read
 
 jobs:
-  pre-commit:
-    uses: broadinstitute/shared-workflows/.github/workflows/pre-commit.yaml@v6
+  prek:
+    uses: broadinstitute/shared-workflows/.github/workflows/prek.yaml@v6
   static-analysis:
     uses: broadinstitute/shared-workflows/.github/workflows/puppet-lint.yaml@v6
   unit-tests:
