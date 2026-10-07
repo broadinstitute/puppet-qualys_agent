@@ -992,6 +992,13 @@ UseSudo=1}
             is_expected.to contain_service('qualys_agent').with(ensure: 'stopped', enable: false)
           end
         end
+        context 'when the agent is already configured' do
+          let(:facts) { os_facts.merge(qualys: { hostid: '00000000-0000-0000-0000-000000000000' }) }
+
+          it do
+            is_expected.not_to contain_file('qualys_properties')
+          end
+        end
       end
     end
   end
