@@ -1,6 +1,7 @@
 ---
 plugins:
 - rubocop-performance
+- rubocop-hash_inspect
 - rubocop-rspec
 - rubocop-rspec_rails
 - rubocop-factory_bot
@@ -108,6 +109,8 @@ Performance/Squeeze:
 Performance/StringInclude:
   Enabled: true
 Performance/Sum:
+  Enabled: true
+Security/IoMethods:
   Enabled: true
 Style/CollectionMethods:
   Enabled: true
@@ -377,8 +380,6 @@ RSpec/VoidExpect:
   Enabled: false
 RSpec/Yield:
   Enabled: false
-Security/Open:
-  Enabled: false
 Style/AccessModifierDeclarations:
   Enabled: false
 Style/AccessorGrouping:
@@ -636,8 +637,6 @@ RSpecRails/MinitestAssertions:
 RSpecRails/TravelAround:
   Enabled: false
 Security/CompoundHash:
-  Enabled: false
-Security/IoMethods:
   Enabled: false
 Style/ArgumentsForwarding:
   Enabled: false
