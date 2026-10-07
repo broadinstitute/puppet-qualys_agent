@@ -1,12 +1,11 @@
 ---
 extends: default
-ignore: |
-  .bundle
-  .rubocop.yml
-  .tmp
-  spec/
+ignore-from-file:
+  - .gitignore
+  - .yamllintignore
 rules:
   comments: disable
+  comments-indentation: disable
   indentation:
     spaces: 2
   line-length:
