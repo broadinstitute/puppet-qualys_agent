@@ -11,6 +11,6 @@ permissions:
 
 jobs:
   deploy:
-    uses: broadinstitute/shared-workflows/.github/workflows/puppet-forge-deploy.yaml@v6.0.0
+    uses: broadinstitute/shared-workflows/.github/workflows/puppet-forge-deploy.yaml@v6
     secrets:
       forge_token: ${{ secrets.BLACKSMITH_FORGE_API_KEY }}
