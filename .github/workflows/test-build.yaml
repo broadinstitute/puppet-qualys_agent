@@ -11,6 +11,6 @@ permissions:
 
 jobs:
   test_build:
-    uses: broadinstitute/shared-workflows/.github/workflows/puppet-build.yaml@v6.0.0
+    uses: broadinstitute/shared-workflows/.github/workflows/puppet-build.yaml@v6
     with:
       puppet_package_name: broadinstitute-qualys_agent
