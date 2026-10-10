@@ -1,6 +1,10 @@
 ---
 appveyor.yml:
   delete: true
+.github/PULL_REQUEST_TEMPLATE.md:
+  delete: true
+.github/workflows/fork_ci_label_guard.yml:
+  delete: true
 .gitignore:
   required:
     - "/.librarian"

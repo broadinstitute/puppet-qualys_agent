@@ -13,6 +13,7 @@ description = "Run a Puppet Strings generation"
 run = "bundle exec puppet strings generate --format markdown; prettier -w REFERENCE.md"
 
 [tools]
-"npm:prettier" = "latest"
 node = "latest"
+prek = "latest"
+prettier = "latest"
 # ruby = "3.3.10"
