@@ -102,6 +102,7 @@ class qualys_agent::config {
       {
         https_proxy        => $qualys_agent::https_proxy,
         qualys_https_proxy => $qualys_agent::qualys_https_proxy,
+        extra_env          => $qualys_agent::extra_env,
       }
     ),
     group     => $qualys_agent::group,

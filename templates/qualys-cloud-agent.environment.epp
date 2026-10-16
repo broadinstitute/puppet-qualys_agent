@@ -1,6 +1,7 @@
 <%- |
   Optional[String] $https_proxy,
   Optional[String] $qualys_https_proxy,
+  Hash[String[1],String[1]] $extra_env,
 | -%>
 # THIS FILE IS AUTOMATICALLY DISTRIBUTED BY PUPPET.
 # ANY CHANGES WILL BE OVERWRITTEN.
@@ -12,4 +13,7 @@ https_proxy=<%= $https_proxy %>
 <% } -%>
 <% unless $qualys_https_proxy =~ Undef { -%>
 qualys_https_proxy=<%= $qualys_https_proxy %>
+<% } -%>
+<% $extra_env.each |$key, $value| { -%>
+<%= $key %>=<%= $value.stdlib::shell_escape %>
 <% } -%>

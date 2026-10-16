@@ -999,6 +999,15 @@ UseSudo=1}
             is_expected.not_to contain_file('qualys_properties')
           end
         end
+        context 'when setting extra environment variables' do
+          let(:params) do
+            { extra_env: { 'LD_PRELOAD' => '/usr/libexec/kcare/kpatch_package.so.qualys' } }
+          end
+
+          it do
+            is_expected.to contain_file('qualys_env').with_content(%r{^LD_PRELOAD=/usr/libexec/kcare/kpatch_package\.so\.qualys$})
+          end
+        end
       end
     end
   end
