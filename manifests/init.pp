@@ -1,6 +1,6 @@
 # @summary Manage an installation of the Qualys Cloud Agent
 #
-# @example
+# @example Minimal example
 #    class { 'qualys_agent':
 #      activation_id => 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',
 #      customer_id   => 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',
@@ -116,6 +116,19 @@
 # @param webservice_uri
 #   The ServerUri value in qualys-cloud-agent.conf (Default: `undef`)
 #
+# @param extra_env
+#   Extra environment variables to define in the environment file.
+#   Can be used to adjust qualys-cloud-agent configuration when using KernelCare.
+#
+# @example Setup Qualys Cloud Agent with KernelCare
+#    class { 'qualys_agent':
+#      activation_id => 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',
+#      customer_id   => 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',
+#      extra_env     => {
+#        'LD_PRELOAD' => '/usr/libexec/kcare/kpatch_package.so.qualys',
+#      },
+#    }
+#
 class qualys_agent (
   Enum['absent', 'present'] $ensure,
   Variant[String[1], Sensitive[String[1]]] $activation_id,
@@ -153,6 +166,7 @@ class qualys_agent (
   Integer $use_audit_dispatcher,
   Integer $use_sudo,
   Optional[String] $webservice_uri,
+  Hash[String[1],String[1]] $extra_env = {},
 ) {
   # Protect against an bad setting for filesystem paths
   if $qualys_agent::agent_user_homedir == '/' {
