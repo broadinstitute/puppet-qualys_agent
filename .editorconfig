@@ -20,6 +20,6 @@ insert_final_newline = false
 [*.{diff,patch}]
 trim_trailing_whitespace = false
 
-[*.{json,md,pp,prettierrc,rb,yaml,yml}]
+[*.{json,md,pp,rb,yaml,yml}]
 indent_size = 2
 indent_style = space

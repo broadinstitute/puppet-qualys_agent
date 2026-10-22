@@ -47,7 +47,7 @@ No trailing slashes should be provided for any paths.
 
 #### Puppet Forge
 
-```sh
+```shell
 puppet module install broadinstitute-qualys_agent
 ```
 
