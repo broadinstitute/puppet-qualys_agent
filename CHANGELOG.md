@@ -1,6 +1,32 @@
 # Changelog
 
-## [0.10.0](https://github.com/broadinstitute/puppet-qualys_agent/tree/0.10.0) (2024-11-05)
+## [1.0.0](https://github.com/broadinstitute/puppet-qualys_agent/tree/1.0.0) (2026-10-22)
+
+[Full Changelog](https://github.com/broadinstitute/puppet-qualys_agent/compare/0.10.0...1.0.0)
+
+**Implemented enhancements:**
+
+- Allow the user to provide extra environment
+  [\#134](https://github.com/broadinstitute/puppet-qualys_agent/pull/134)
+  ([smortex](https://github.com/smortex))
+- feat: Update version and OS / dependency versions
+  [\#132](https://github.com/broadinstitute/puppet-qualys_agent/pull/132)
+  ([coreone](https://github.com/coreone))
+- Improve idempotency
+  [\#131](https://github.com/broadinstitute/puppet-qualys_agent/pull/131)
+  ([smortex](https://github.com/smortex))
+- Fix logging pattern to match Qualys defaults
+  [\#130](https://github.com/broadinstitute/puppet-qualys_agent/pull/130)
+  ([smortex](https://github.com/smortex))
+
+**Closed issues:**
+
+- KernelCare non-functionning when using the module
+  [\#133](https://github.com/broadinstitute/puppet-qualys_agent/issues/133)
+- Update or Parameterize logging.formatters.f1.pattern
+  [\#129](https://github.com/broadinstitute/puppet-qualys_agent/issues/129)
+
+## [0.10.0](https://github.com/broadinstitute/puppet-qualys_agent/tree/0.10.0) (2024-11-06)
 
 [Full Changelog](https://github.com/broadinstitute/puppet-qualys_agent/compare/0.9.3...0.10.0)
 
@@ -15,7 +41,7 @@
 - Deprecate OSes, config update
   [\#25](https://github.com/broadinstitute/puppet-qualys_agent/pull/25)
   ([coreone](https://github.com/coreone))
-- Adds webservice_uri to configuration
+- Adds webservice\_uri to configuration
   [\#23](https://github.com/broadinstitute/puppet-qualys_agent/pull/23)
   ([ralfbosz](https://github.com/ralfbosz))
 
@@ -38,7 +64,7 @@
 
 **Implemented enhancements:**
 
-- Ability to configure qualys_https_proxy and https_proxy.
+- Ability to configure qualys\_https\_proxy and https\_proxy.
   [\#19](https://github.com/broadinstitute/puppet-qualys_agent/pull/19)
   ([zschulte](https://github.com/zschulte))
 
