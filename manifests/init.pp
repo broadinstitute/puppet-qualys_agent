@@ -6,6 +6,14 @@
 #      customer_id   => 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',
 #    }
 #
+# @example Windows example
+#    class { 'qualys_agent':
+#      activation_id  => 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',
+#      customer_id    => 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',
+#      package_source => 'https://repo.example.com/qualys/QualysCloudAgent.exe',
+#      webservice_uri => 'https://qagpublic.qg1.apps.qualys.eu/CloudAgent/',
+#    }
+#
 # @param ensure
 #   Ensure that the Qualys agent is present on the system, or absent.
 #
@@ -81,7 +89,20 @@
 #   or a version number if you want to specify a specific package version numer. (Default: `installed`)
 #
 # @param package_name
-#   The name of the package to install (Default: `qualys-cloud-agent`)
+#   The name of the package to install (Default: `qualys-cloud-agent`, `Qualys Cloud Security Agent` on Windows)
+#
+# @param package_download_dir
+#   Windows only. The directory in which the installer downloaded from `package_source` is stored (Default: `C:\Windows\Temp`)
+#
+# @param package_source
+#   Windows only. The location of the Qualys Cloud Agent installer (`QualysCloudAgent.exe`), as accepted by the
+#   `source` attribute of a `file` resource (`puppet:///`, `https://`, local path, ...). Required on Windows. (Default: `undef`)
+#
+# @param golden_image
+#   Windows only. When set, the `GoldenImage` installer option is passed with this value. With `true`, the agent
+#   is installed in a non-running state and does not generate a HostID, which is meant for cloning (gold image).
+#   You will then probably want `manage_service` set to `false`. When `undef`, the option is not passed and the
+#   installer default applies. (Default: `undef`)
 #
 # @param process_priority
 #   The ProcessPriority value in qualys-cloud-agent.conf (Default: `0`)
@@ -99,7 +120,7 @@
 #   Ensure that the Qualys agent is running on the system, or stopped (Default: `running`)
 #
 # @param service_name
-#   The name of the Qualys agent service (Default: `qualys-cloud-agent`)
+#   The name of the Qualys agent service (Default: `qualys-cloud-agent`, `QualysAgent` on Windows)
 #
 # @param sudo_command
 #   The SudoCommand value in qualys-cloud-agent.conf (Default: `sudo`)
@@ -167,7 +188,17 @@ class qualys_agent (
   Integer $use_sudo,
   Optional[String] $webservice_uri,
   Hash[String[1],String[1]] $extra_env = {},
+  Optional[Stdlib::Absolutepath] $package_download_dir = undef,
+  Optional[String[1]] $package_source = undef,
+  Optional[Boolean] $golden_image = undef,
 ) {
+  if $facts['os']['family'] == 'windows' {
+    # Windows agents are configured through installer options only: none of the
+    # Unix files, users and paths below apply.
+    contain 'qualys_agent::windows'
+    return()
+  }
+
   # Protect against an bad setting for filesystem paths
   if $qualys_agent::agent_user_homedir == '/' {
     fail('agent_user_homedir is set to /.  Installation cannot continue.')

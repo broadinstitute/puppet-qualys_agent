@@ -18,6 +18,7 @@
    - [Puppet Manifest](#puppet-manifest)
    - [With Hiera](#with-hiera)
    - [Running as a user other than root](#running-as-a-user-other-than-root)
+   - [Windows](#windows)
 5. [Reference](#reference)
 6. [Limitations - OS compatibility, etc.](#limitations)
 7. [Release Notes](#release-notes)
@@ -95,6 +96,34 @@ qualys_agent::use_sudo: 1
 This turns on the use of sudo, but it also sets the `User` and `SudoUser`
 variables in the configuration file, which are both necessary to make the
 service run as a non-root user.
+
+### Windows
+
+On Windows, the agent is configured through the options of the installer
+(`QualysCloudAgent.exe`) rather than through configuration files, so most
+parameters do not apply. The installer is copied from `package_source` to
+`package_download_dir`, then installed with the `windows` package provider.
+`package_source` and `webservice_uri` are required:
+
+```yaml
+qualys_agent::activation_id: "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+qualys_agent::customer_id: "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+qualys_agent::package_source: "https://repo.example.com/qualys/QualysCloudAgent.exe"
+qualys_agent::webservice_uri: "https://qagpublic.qg1.apps.qualys.eu/CloudAgent/"
+```
+
+The parameters used on Windows are `ensure`, `activation_id`, `customer_id`,
+`webservice_uri`, `package_source`, `package_download_dir`, `package_ensure`,
+`package_name`, `golden_image`, `manage_package`, `manage_service`,
+`service_enable`, `service_ensure` and `service_name`.
+
+To prepare a gold image, set `golden_image` to `true` so that the agent is
+installed without generating a HostID, and `manage_service` to `false` so that
+Puppet does not start it.
+
+Note that Puppet cannot redact the `install_options` of a package: even when
+`activation_id` and `customer_id` are `Sensitive`, they are visible in the
+catalog and in the agent debug output.
 
 ## Reference
 
