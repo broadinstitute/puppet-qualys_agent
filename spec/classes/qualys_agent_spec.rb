@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe 'qualys_agent' do
   on_supported_os.each do |os, os_facts|
+    next if os_facts[:os]['family'] == 'windows'
+
     context "on #{os}" do
       let(:facts) { os_facts }
 
@@ -1006,6 +1008,211 @@ UseSudo=1}
 
           it do
             is_expected.to contain_file('qualys_env').with_content(%r{^LD_PRELOAD=/usr/libexec/kcare/kpatch_package\.so\.qualys$})
+          end
+        end
+      end
+    end
+  end
+
+  on_supported_os.each do |os, os_facts|
+    next unless os_facts[:os]['family'] == 'windows'
+
+    context "on #{os}" do
+      let(:facts) { os_facts }
+
+      context 'without activation_id' do
+        it do
+          is_expected.to compile.and_raise_error(%r{activation_id})
+        end
+      end
+
+      context 'with correct activation_id and customer_id' do
+        let(:environment) { 'unittest' }
+        let(:base_params) do
+          {
+            package_source: 'puppet:///modules/profile/QualysCloudAgent.exe',
+            webservice_uri: 'https://qagpublic.qg1.apps.qualys.eu/CloudAgent/',
+          }
+        end
+        let(:params) { base_params }
+        let(:install_options) do
+          [
+            'CustomerId={XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX}',
+            'ActivationId={XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX}',
+            'WebServiceUri=https://qagpublic.qg1.apps.qualys.eu/CloudAgent/',
+          ]
+        end
+
+        context 'with default values for all parameters' do
+          it do
+            is_expected.to compile.with_all_deps
+          end
+          it do
+            is_expected.to contain_class('qualys_agent::windows')
+          end
+          it do
+            is_expected.not_to contain_class('qualys_agent::user')
+          end
+          it do
+            is_expected.not_to contain_class('qualys_agent::package')
+          end
+          it do
+            is_expected.not_to contain_class('qualys_agent::config')
+          end
+          it do
+            is_expected.not_to contain_class('qualys_agent::service')
+          end
+          it do
+            is_expected.to contain_file('qualys_installer').with(
+              ensure: 'file',
+              path: 'C:\\Windows\\Temp\\QualysCloudAgent.exe',
+              source: 'puppet:///modules/profile/QualysCloudAgent.exe',
+            )
+          end
+          it do
+            is_expected.to contain_package('qualys_agent').with(
+              ensure: 'installed',
+              name: 'Qualys Cloud Security Agent',
+              provider: 'windows',
+              source: 'C:\\Windows\\Temp\\QualysCloudAgent.exe',
+              install_options: install_options,
+            ).that_requires('File[qualys_installer]')
+          end
+          it do
+            is_expected.to contain_service('qualys_agent').with(
+              ensure: 'running',
+              enable: true,
+              name: 'QualysAgent',
+            ).that_subscribes_to('Package[qualys_agent]')
+          end
+        end
+
+        context 'with a package_source using a query string' do
+          let(:params) { base_params.merge(package_source: 'https://bucket.example.com/qualys/QualysCloudAgent_6.1.exe?X-Amz-Signature=abc') }
+
+          it do
+            is_expected.to contain_file('qualys_installer').with(
+              path: 'C:\\Windows\\Temp\\QualysCloudAgent.exe',
+              source: 'https://bucket.example.com/qualys/QualysCloudAgent_6.1.exe?X-Amz-Signature=abc',
+            )
+          end
+        end
+
+        context 'with package_download_dir set' do
+          let(:params) { base_params.merge(package_download_dir: 'D:\\sources') }
+
+          it do
+            is_expected.to contain_package('qualys_agent').with_source('D:\\sources\\QualysCloudAgent.exe')
+          end
+        end
+
+        context 'with Sensitive activation_id and customer_id' do
+          let(:params) do
+            base_params.merge(
+              activation_id: sensitive('XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX'),
+              customer_id: sensitive('XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX'),
+            )
+          end
+
+          it do
+            is_expected.to contain_package('qualys_agent').with_install_options(install_options)
+          end
+        end
+
+        context 'with golden_image set to true' do
+          let(:params) { base_params.merge(golden_image: true) }
+
+          it do
+            is_expected.to contain_package('qualys_agent').with_install_options(install_options + ['GoldenImage=true'])
+          end
+        end
+
+        context 'with golden_image set to false' do
+          let(:params) { base_params.merge(golden_image: false) }
+
+          it do
+            is_expected.to contain_package('qualys_agent').with_install_options(install_options + ['GoldenImage=false'])
+          end
+        end
+
+        context 'with package_ensure set to a version' do
+          let(:params) { base_params.merge(package_ensure: '6.1.0.28') }
+
+          it do
+            is_expected.to contain_package('qualys_agent').with_ensure('6.1.0.28')
+          end
+        end
+
+        context 'with service_ensure set to stopped and service_enable set to false' do
+          let(:params) { base_params.merge(service_ensure: 'stopped', service_enable: false) }
+
+          it do
+            is_expected.to contain_service('qualys_agent').with(ensure: 'stopped', enable: false)
+          end
+        end
+
+        context 'with manage_service set to false' do
+          let(:params) { base_params.merge(manage_service: false) }
+
+          it do
+            is_expected.to contain_package('qualys_agent')
+          end
+          it do
+            is_expected.not_to contain_service('qualys_agent')
+          end
+        end
+
+        context 'with manage_package set to false' do
+          let(:params) { { manage_package: false } }
+
+          it do
+            is_expected.to compile.with_all_deps
+          end
+          it do
+            is_expected.not_to contain_package('qualys_agent')
+          end
+          it do
+            is_expected.not_to contain_file('qualys_installer')
+          end
+          it do
+            is_expected.to contain_service('qualys_agent').with_ensure('running')
+          end
+        end
+
+        context 'without package_source' do
+          let(:params) { base_params.merge(package_source: :undef) }
+
+          it do
+            is_expected.to compile.and_raise_error(%r{package_source must be set on Windows})
+          end
+        end
+
+        context 'without webservice_uri' do
+          let(:params) { base_params.merge(webservice_uri: :undef) }
+
+          it do
+            is_expected.to compile.and_raise_error(%r{webservice_uri must be set on Windows})
+          end
+        end
+
+        context 'with ensure set to absent' do
+          let(:params) { { ensure: 'absent' } }
+
+          it do
+            is_expected.to compile.with_all_deps
+          end
+          it do
+            is_expected.to contain_package('qualys_agent').with(
+              ensure: 'absent',
+              name: 'Qualys Cloud Security Agent',
+              provider: 'windows',
+            )
+          end
+          it do
+            is_expected.not_to contain_file('qualys_installer')
+          end
+          it do
+            is_expected.not_to contain_service('qualys_agent')
           end
         end
       end

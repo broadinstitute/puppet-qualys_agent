@@ -1,0 +1,4 @@
+---
+qualys_agent::package_download_dir: 'C:\Windows\Temp'
+qualys_agent::package_name: Qualys Cloud Security Agent
+qualys_agent::service_name: QualysAgent

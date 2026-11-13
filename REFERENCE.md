@@ -6,6 +6,8 @@
 
 ### Classes
 
+#### Public Classes
+
 - [`qualys_agent`](#qualys_agent): Manage an installation of the Qualys Cloud
   Agent
 - [`qualys_agent::config`](#qualys_agent--config): Configure the Qualys agent
@@ -19,6 +21,10 @@
   service
 - [`qualys_agent::user`](#qualys_agent--user): Configure the user and group to
   run the Qualys agent service
+
+#### Private Classes
+
+- `qualys_agent::windows`: Install and run the Qualys agent on Windows
 
 ## Classes
 
@@ -34,6 +40,17 @@ Manage an installation of the Qualys Cloud Agent
 class { 'qualys_agent':
   activation_id => 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',
   customer_id   => 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',
+}
+```
+
+##### Windows example
+
+```puppet
+class { 'qualys_agent':
+  activation_id  => 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',
+  customer_id    => 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',
+  package_source => 'https://repo.example.com/qualys/QualysCloudAgent.exe',
+  webservice_uri => 'https://qagpublic.qg1.apps.qualys.eu/CloudAgent/',
 }
 ```
 
@@ -78,6 +95,9 @@ The following parameters are available in the `qualys_agent` class:
 - [`manage_user`](#-qualys_agent--manage_user)
 - [`package_ensure`](#-qualys_agent--package_ensure)
 - [`package_name`](#-qualys_agent--package_name)
+- [`package_download_dir`](#-qualys_agent--package_download_dir)
+- [`package_source`](#-qualys_agent--package_source)
+- [`golden_image`](#-qualys_agent--golden_image)
 - [`process_priority`](#-qualys_agent--process_priority)
 - [`qualys_https_proxy`](#-qualys_agent--qualys_https_proxy)
 - [`request_timeout`](#-qualys_agent--request_timeout)
@@ -253,7 +273,40 @@ numer. (Default: `installed`)
 
 Data type: `String`
 
-The name of the package to install (Default: `qualys-cloud-agent`)
+The name of the package to install (Default: `qualys-cloud-agent`,
+`Qualys Cloud Security Agent` on Windows)
+
+##### <a name="-qualys_agent--package_download_dir"></a>`package_download_dir`
+
+Data type: `Optional[Stdlib::Absolutepath]`
+
+Windows only. The directory in which the installer downloaded from
+`package_source` is stored (Default: `C:\Windows\Temp`)
+
+Default value: `undef`
+
+##### <a name="-qualys_agent--package_source"></a>`package_source`
+
+Data type: `Optional[String[1]]`
+
+Windows only. The location of the Qualys Cloud Agent installer
+(`QualysCloudAgent.exe`), as accepted by the `source` attribute of a `file`
+resource (`puppet:///`, `https://`, local path, ...). Required on Windows.
+(Default: `undef`)
+
+Default value: `undef`
+
+##### <a name="-qualys_agent--golden_image"></a>`golden_image`
+
+Data type: `Optional[Boolean]`
+
+Windows only. When set, the `GoldenImage` installer option is passed with this
+value. With `true`, the agent is installed in a non-running state and does not
+generate a HostID, which is meant for cloning (gold image). You will then
+probably want `manage_service` set to `false`. When `undef`, the option is not
+passed and the installer default applies. (Default: `undef`)
+
+Default value: `undef`
 
 ##### <a name="-qualys_agent--process_priority"></a>`process_priority`
 
@@ -291,7 +344,8 @@ Ensure that the Qualys agent is running on the system, or stopped (Default:
 
 Data type: `String`
 
-The name of the Qualys agent service (Default: `qualys-cloud-agent`)
+The name of the Qualys agent service (Default: `qualys-cloud-agent`,
+`QualysAgent` on Windows)
 
 ##### <a name="-qualys_agent--sudo_command"></a>`sudo_command`
 
